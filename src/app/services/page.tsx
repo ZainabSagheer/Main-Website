@@ -46,8 +46,8 @@ export default function ServicesPage() {
                     <service.icon className="w-32 h-32" />
                   </div>
 
-                  <div className={`w-16 h-16 bg-${service.color}/10 rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform`}>
-                    <service.icon className={`w-8 h-8 text-${service.color}`} />
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform" style={{ backgroundColor: service.iconBg }}>
+                    <service.icon className="w-8 h-8" style={{ color: service.iconColor }} />
                   </div>
 
                   <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">{service.title}</h2>

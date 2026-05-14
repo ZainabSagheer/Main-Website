@@ -58,8 +58,8 @@ export default function ServicesGrid() {
               <Link href={`/services/${service.slug}`}>
                 <GlowingCard className="h-full">
                   <div className="p-10 group cursor-pointer relative overflow-hidden h-full">
-                    <div className={`w-14 h-14 rounded-2xl bg-${service.color}/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500`}>
-                      <service.icon className={`w-7 h-7 text-${service.color}`} />
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500" style={{ backgroundColor: service.iconBg }}>
+                      <service.icon className="w-7 h-7" style={{ color: service.iconColor }} />
                     </div>
                     
                     <h3 className="text-2xl font-bold mb-4 relative z-10">{service.title}</h3>

@@ -1,9 +1,9 @@
-import { 
-  Rocket, 
-  Brain, 
-  Globe, 
-  Smartphone, 
-  Search, 
+import {
+  Rocket,
+  Brain,
+  Globe,
+  Smartphone,
+  Search,
   TrendingUp,
 } from "lucide-react";
 
@@ -14,13 +14,14 @@ export const services = [
     desc: "Scale your business with intelligent autonomous workflows and custom AI agents.",
     fullDesc: "We architect custom neural networks and autonomous agents that transform how your business operates. From predictive analytics to automated customer service, our AI solutions are built to scale and evolve.",
     icon: Brain,
-    color: "brand-cyan",
+    iconBg: "#00D9FF1A",
+    iconColor: "#00D9FF",
     features: [
       "Custom GPT & LLM Training",
       "Workflow Automation Agents",
       "Predictive Data Analytics",
-      "Neural Network Architecture"
-    ]
+      "Neural Network Architecture",
+    ],
   },
   {
     slug: "digital-marketing",
@@ -28,13 +29,14 @@ export const services = [
     desc: "Data-driven strategies that dominate search results and social media engagement.",
     fullDesc: "Our marketing systems combine psychological triggers with algorithmic precision. We don't just generate traffic; we engineer high-converting digital ecosystems that turn visitors into loyal brand advocates.",
     icon: Rocket,
-    color: "brand-purple",
+    iconBg: "#7C3AED1A",
+    iconColor: "#7C3AED",
     features: [
       "Algorithmic Media Buying",
       "Conversion Rate Optimization",
       "Social Engineering & Virality",
-      "Marketing Automation Stacks"
-    ]
+      "Marketing Automation Stacks",
+    ],
   },
   {
     slug: "web-development",
@@ -42,13 +44,14 @@ export const services = [
     desc: "Futuristic, high-performance web applications built with the latest technologies.",
     fullDesc: "We build more than websites; we build high-performance digital engines. Using the latest in Next.js, WebGL, and edge computing, our platforms are lightning fast and visually stunning.",
     icon: Globe,
-    color: "brand-cyan",
+    iconBg: "#00D9FF1A",
+    iconColor: "#00D9FF",
     features: [
-      "Next.js 15 & React 19 Architectures",
+      "Next.js & React Architectures",
       "Interactive 3D Web Experiences",
       "Scalable Microservices Backend",
-      "Cloud-Native Infrastructure"
-    ]
+      "Cloud-Native Infrastructure",
+    ],
   },
   {
     slug: "mobile-apps",
@@ -56,13 +59,14 @@ export const services = [
     desc: "Immersive iOS and Android experiences designed for maximum user retention.",
     fullDesc: "Mobile-first is no longer enough. We build mobile-only experiences that leverage the latest in hardware acceleration and biometrics to provide seamless, addictive user interfaces.",
     icon: Smartphone,
-    color: "brand-purple",
+    iconBg: "#7C3AED1A",
+    iconColor: "#7C3AED",
     features: [
       "Native iOS & Android Development",
       "Cross-Platform Flutter Solutions",
       "Real-time Data Sync",
-      "Biometric Security Integration"
-    ]
+      "Biometric Security Integration",
+    ],
   },
   {
     slug: "seo-optimization",
@@ -70,13 +74,14 @@ export const services = [
     desc: "AI-powered search engine optimization to keep you at the top of every query.",
     fullDesc: "Search is evolving, and so should your strategy. We use AI to analyze search intent and semantic relationships, ensuring your brand stays ahead of algorithm shifts and generative search results.",
     icon: Search,
-    color: "brand-cyan",
+    iconBg: "#00D9FF1A",
+    iconColor: "#00D9FF",
     features: [
       "AI-Powered Keyword Intelligence",
       "Semantic Content Engineering",
       "Technical Authority Building",
-      "Generative Search Optimization"
-    ]
+      "Generative Search Optimization",
+    ],
   },
   {
     slug: "trading-tech",
@@ -84,12 +89,13 @@ export const services = [
     desc: "Advanced algorithmic trading systems for PSX, PMEX, and Crypto markets.",
     fullDesc: "We bring institutional-grade trading technology to ambitious investors. Our systems utilize low-latency architectures and machine learning to identify and execute alpha-generating opportunities.",
     icon: TrendingUp,
-    color: "brand-purple",
+    iconBg: "#7C3AED1A",
+    iconColor: "#7C3AED",
     features: [
       "Algorithmic Execution Engines",
       "Market Making Algorithms",
       "Real-time Portfolio Risk AI",
-      "Low-Latency API Integration"
-    ]
-  }
+      "Low-Latency API Integration",
+    ],
+  },
 ];

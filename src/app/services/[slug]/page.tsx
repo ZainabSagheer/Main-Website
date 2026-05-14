@@ -31,8 +31,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mb-24">
           <div>
-            <div className={`w-20 h-20 rounded-3xl bg-${service.color}/10 flex items-center justify-center mb-10`}>
-              <Icon className={`w-10 h-10 text-${service.color}`} />
+            <div className="w-20 h-20 rounded-3xl flex items-center justify-center mb-10" style={{ backgroundColor: service.iconBg }}>
+              <Icon className="w-10 h-10" style={{ color: service.iconColor }} />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-8 text-slate-900 dark:text-white">
               {service.title}<span className="text-brand-cyan">.</span>
