@@ -82,9 +82,23 @@ jobs:
             set -e
             DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
             TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
+
+            # Swap in new files
             rm -rf ${DEPLOY_DIR}_old
             mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true
             mkdir -p $DEPLOY_DIR
             tar -xzf $TAR_FILE -C $DEPLOY_DIR
             rm -f $TAR_FILE
-            echo "Deploy complete at $(date)"
+
+            # Restart the Node.js process
+            pkill -f "node.*server.js" 2>/dev/null || true
+            sleep 2
+            cd $DEPLOY_DIR
+            nohup node server.js > /tmp/nextjs.log 2>&1 &
+            sleep 3
+            if pgrep -f "node.*server.js" > /dev/null; then
+              echo "App restarted successfully at $(date)"
+            else
+              echo "WARNING: App may not have started. Check /tmp/nextjs.log"
+              cat /tmp/nextjs.log || true
+            fi
