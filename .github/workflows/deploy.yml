@@ -43,24 +43,48 @@ jobs:
           echo "NEXT_PUBLIC_SITE_URL=https://bitsolmarketing.com" >> .next/standalone/.env
           echo "NEXT_PUBLIC_API_URL=https://admin.bitsolmarketing.com" >> .next/standalone/.env
 
-      - name: Deploy to Hostinger via SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: 92.113.19.228
-          username: u293105347
-          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
-          port: 65002
-          source: ".next/standalone/."
-          target: /home/u293105347/domains/bitsolmarketing.com/public_nodejs
-          rm: true
+      - name: Create deployment tarball
+        run: |
+          cd .next/standalone
+          tar -czf ../../deploy.tar.gz .
 
-      - name: Restart Node.js app on Hostinger
+      - name: Ensure target directory exists
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 92.113.19.228
           username: u293105347
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
           port: 65002
+          use_insecure_cipher: true
           script: |
-            cd /home/u293105347/domains/bitsolmarketing.com/public_nodejs
+            mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs
+
+      - name: Upload tarball to Hostinger
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 92.113.19.228
+          username: u293105347
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          port: 65002
+          use_insecure_cipher: true
+          source: "deploy.tar.gz"
+          target: /home/u293105347/domains/bitsolmarketing.com/
+
+      - name: Extract and finalize on Hostinger
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 92.113.19.228
+          username: u293105347
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          port: 65002
+          use_insecure_cipher: true
+          script: |
+            set -e
+            DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
+            TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
+            rm -rf ${DEPLOY_DIR}_old
+            mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true
+            mkdir -p $DEPLOY_DIR
+            tar -xzf $TAR_FILE -C $DEPLOY_DIR
+            rm -f $TAR_FILE
             echo "Deploy complete at $(date)"
