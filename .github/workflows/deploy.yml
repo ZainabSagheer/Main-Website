@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate Prisma client
+        run: npx prisma generate
+
       - name: Build Next.js app
         run: node node_modules/next/dist/bin/next build
         env:
@@ -39,7 +42,8 @@ jobs:
 
       - name: Write .env to standalone
         run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .next/standalone/.env
+          echo "NODE_ENV=production" > .next/standalone/.env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .next/standalone/.env
           echo "BLOG_API_KEY=${{ secrets.BLOG_API_KEY }}" >> .next/standalone/.env
           echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .next/standalone/.env
           echo "NEXT_PUBLIC_SITE_URL=https://bitsolmarketing.com" >> .next/standalone/.env
