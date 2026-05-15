@@ -2,11 +2,42 @@ import Hero from "@/components/hero/Hero";
 import ServicesGrid from "@/components/home/ServicesGrid";
 import Testimonials from "@/components/home/Testimonials";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
+import BlogPreview from "@/components/home/BlogPreview";
 import { Button } from "@/components/ui/button";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
-export default function Home() {
+export default async function Home() {
+  let blogPosts: {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string | null;
+    content: string;
+    tags: string[];
+    createdAt: Date;
+  }[] = [];
+
+  try {
+    blogPosts = await prisma.blog.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+      take: 3,
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        excerpt: true,
+        content: true,
+        tags: true,
+        createdAt: true,
+      },
+    });
+  } catch {
+    // DB unavailable — blog section simply won't render
+  }
+
   return (
     <div className="relative w-full">
       <Hero />
@@ -57,6 +88,9 @@ export default function Home() {
 
       {/* Portfolio Preview */}
       <PortfolioPreview />
+
+      {/* Blog Preview */}
+      <BlogPreview posts={blogPosts} />
 
       {/* Final CTA Section */}
       <section className="py-24 bg-transparent text-center border-t border-slate-200 dark:border-white/5">

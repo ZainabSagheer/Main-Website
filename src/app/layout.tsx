@@ -13,15 +13,31 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bitsolmarketing.com"),
   title: {
-    default: "BITSOL Marketing | Architects of Digital Innovation",
-    template: "%s | BITSOL Marketing"
+    default: "BITSOL Marketing | AI Digital Marketing Agency Pakistan",
+    template: "%s | BITSOL Marketing",
   },
-  description: "BITSOL Marketing: Leading the AI revolution in digital ecosystems. We architect intelligent automations, high-performance web systems, and data-driven growth strategies.",
-  keywords: ["AI Marketing", "Digital Innovation", "Algorithmic Trading", "Neural Networks", "Web Architecture", "BITSOL", "Automation", "Software Engineering Pakistan"],
-  authors: [{ name: "BITSOL Engineering Team" }],
+  description:
+    "BITSOL Marketing is a full-service AI digital marketing agency in Pakistan. We deliver AI SEO, chatbot development, Meta ads, automation, and growth marketing globally.",
+  keywords: [
+    "AI digital marketing agency",
+    "AI marketing agency Pakistan",
+    "AI SEO services",
+    "AI chatbot development",
+    "digital marketing agency Pakistan",
+    "WhatsApp AI automation",
+    "Meta ads agency",
+    "growth marketing agency",
+    "web development Pakistan",
+    "BITSOL Marketing",
+  ],
+  authors: [{ name: "BITSOL Marketing Team" }],
   creator: "BITSOL Marketing PVT LTD",
   publisher: "BITSOL Marketing PVT LTD",
+  alternates: {
+    canonical: "https://bitsolmarketing.com",
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -32,22 +48,24 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://bitsolmarketing.com",
     siteName: "BITSOL Marketing",
-    title: "BITSOL Marketing | AI-Powered Digital Innovation",
-    description: "Architecting the digital future with AI-driven ecosystems and high-performance engineering.",
+    title: "BITSOL Marketing | AI Digital Marketing Agency Pakistan",
+    description:
+      "Full-service AI digital marketing agency offering SEO, chatbot development, Meta ads, automation and growth marketing for businesses in Pakistan and globally.",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://bitsolmarketing.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "BITSOL Marketing Innovation",
+        alt: "BITSOL Marketing — AI Digital Marketing Agency",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITSOL Marketing | AI-Powered Digital Innovation",
-    description: "Leading the AI revolution in digital ecosystems and growth strategies.",
-    images: ["/og-image.png"],
+    title: "BITSOL Marketing | AI Digital Marketing Agency",
+    description:
+      "AI SEO, chatbot development, Meta ads & automation for businesses in Pakistan and worldwide.",
+    images: ["https://bitsolmarketing.com/og-image.png"],
   },
   robots: {
     index: true,
