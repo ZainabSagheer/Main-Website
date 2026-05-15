@@ -83,6 +83,7 @@ export const metadata: Metadata = {
 import { ThemeProvider } from "@/components/theme-provider";
 import { ContactPopup } from "@/components/ContactPopup";
 import { FloatingDock } from "@/components/FloatingDock";
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -92,7 +93,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
+        <Script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -119,6 +121,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${montserrat.variable} font-sans antialiased bg-white dark:bg-[#050816] text-slate-900 dark:text-white transition-colors duration-300`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
