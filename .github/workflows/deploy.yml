@@ -37,33 +37,30 @@ jobs:
 
       - name: Write .env to standalone
         run: |
-          cat > .next/standalone/.env << 'EOF'
-          DATABASE_URL=${{ secrets.DATABASE_URL }}
-          BLOG_API_KEY=${{ secrets.BLOG_API_KEY }}
-          RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
-          NEXT_PUBLIC_SITE_URL=https://bitsolmarketing.com
-          NEXT_PUBLIC_API_URL=https://admin.bitsolmarketing.com
-          EOF
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .next/standalone/.env
+          echo "BLOG_API_KEY=${{ secrets.BLOG_API_KEY }}" >> .next/standalone/.env
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .next/standalone/.env
+          echo "NEXT_PUBLIC_SITE_URL=https://bitsolmarketing.com" >> .next/standalone/.env
+          echo "NEXT_PUBLIC_API_URL=https://admin.bitsolmarketing.com" >> .next/standalone/.env
 
-      - name: Deploy to Hostinger via SSH
+      - name: Deploy to Hostinger via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.HOSTINGER_SSH_HOST }}
-          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          host: 92.113.19.228
+          username: u293105347
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
           port: 65002
           source: ".next/standalone/."
-          target: ${{ secrets.HOSTINGER_APP_PATH }}
+          target: /home/u293105347/domains/bitsolmarketing.com/public_nodejs
           rm: true
 
       - name: Restart Node.js app on Hostinger
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.HOSTINGER_SSH_HOST }}
-          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          host: 92.113.19.228
+          username: u293105347
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
           port: 65002
           script: |
-            cd ${{ secrets.HOSTINGER_APP_PATH }}
-            node --version
-            echo "Deploy complete — app files updated"
+            cd /home/u293105347/domains/bitsolmarketing.com/public_nodejs
+            echo "Deploy complete at $(date)"
