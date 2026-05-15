@@ -9,7 +9,14 @@
       "Bash(curl -s -A \"Googlebot/2.1 \\(+http://www.google.com/bot.html\\)\" https://bitsolmarketing.com)",
       "Bash(curl -s \"https://bitsolmarketing.com\")",
       "Bash(node node_modules/next/dist/bin/next build)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(npx tsc *)",
+      "Bash([ -f \"d:/BITSOL Marketing Private Limited/bitsol-frontend/src/app/$dir/page.tsx\" ])",
+      "Bash(npx next *)",
+      "PowerShell(New-Item -ItemType Directory -Force \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\\\\.github\\\\workflows\")",
+      "Bash(gh auth *)",
+      "PowerShell(gh auth status 2>&1)",
+      "Bash(git commit *)"
     ]
   }
 }
