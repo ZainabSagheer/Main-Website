@@ -4,7 +4,12 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Bash(not exist *)",
-      "PowerShell(New-Item -ItemType Directory -Force -Path \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\\\\scripts\")"
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\\\\scripts\")",
+      "Bash(curl -s -A \"Googlebot/2.1 \\(+http://www.google.com/bot.html\\)\" https://bitsolmarketing.com -I)",
+      "Bash(curl -s -A \"Googlebot/2.1 \\(+http://www.google.com/bot.html\\)\" https://bitsolmarketing.com)",
+      "Bash(curl -s \"https://bitsolmarketing.com\")",
+      "Bash(node node_modules/next/dist/bin/next build)",
+      "Bash(git add *)"
     ]
   }
 }
