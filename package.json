@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "build:hostinger": "npm run build && node prepare-hostinger.mjs",
+    "start": "node server.js",
     "lint": "eslint"
   },
   "dependencies": {
@@ -39,11 +40,15 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/archiver": "^7.0.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "archiver": "^8.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "fs-extra": "^11.3.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

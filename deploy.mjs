@@ -9,9 +9,9 @@ async function deploy() {
     client.ftp.verbose = true;
     try {
         await client.access({
-            host: "ftp.bitsolmarketing.com",
-            user: "gravity@bitsolmarketing.com",
-            password: "Gravity@548548",
+            host: process.env.FTP_HOST,
+            user: process.env.FTP_USER,
+            password: process.env.FTP_PASSWORD,
             secure: false
         });
         
