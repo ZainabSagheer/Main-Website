@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next';
-
-export const dynamic = "force-static";
 import { projects } from '@/lib/portfolio';
+import { prisma } from '@/lib/prisma';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://bitsolmarketing.com';
 
-  // Core static pages
   const staticPages = [
     '',
     '/about',
@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/trading',
     '/courses',
     '/portfolio',
+    '/blog',
     '/contact',
     '/terms',
     '/privacy',
@@ -24,10 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1.0 : 0.8,
+    priority: route === '' ? 1.0 : route === '/blog' ? 0.9 : 0.8,
   }));
 
-  // Dynamic portfolio pages
   const portfolioPages = projects.map((project) => ({
     url: `${baseUrl}/portfolio/${project.slug}`,
     lastModified: new Date(),
@@ -35,5 +35,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...portfolioPages];
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const posts = await prisma.blog.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+      orderBy: { createdAt: 'desc' },
+    });
+    blogPages = posts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.updatedAt,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
+  } catch {
+    // DB unavailable at build time — skip blog entries
+  }
+
+  return [...staticPages, ...portfolioPages, ...blogPages];
 }

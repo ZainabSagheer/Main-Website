@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(not exist *)",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\\\\scripts\")"
+    ]
+  }
+}
