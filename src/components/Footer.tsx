@@ -38,7 +38,7 @@ const navigation = {
             { name: "About Us", href: "/about" },
             { name: "Our Process", href: "/about#process" },
             { name: "Careers", href: "/careers" },
-            { name: "Insights", href: "/blog" },
+            { name: "Blog", href: "/blog" },
           ],
         },
         {

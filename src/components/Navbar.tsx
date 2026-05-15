@@ -12,9 +12,8 @@ const navLinks = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "AI Solutions", href: "/ai-solutions" },
-  { name: "Trading", href: "/trading" },
-  { name: "Courses", href: "/courses" },
   { name: "Portfolio", href: "/portfolio" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
