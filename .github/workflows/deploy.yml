@@ -92,15 +92,9 @@ jobs:
             tar -xzf $TAR_FILE -C $DEPLOY_DIR
             rm -f $TAR_FILE
 
-            # Restart the Node.js process
-            pkill -f "node.*server.js" 2>/dev/null || true
-            sleep 2
-            cd $DEPLOY_DIR
-            nohup node server.js > /tmp/nextjs.log 2>&1 &
-            sleep 3
-            if pgrep -f "node.*server.js" > /dev/null; then
-              echo "App restarted successfully at $(date)"
-            else
-              echo "WARNING: App may not have started. Check /tmp/nextjs.log"
-              cat /tmp/nextjs.log || true
-            fi
+            # Touch the entry file — Hostinger's process manager watches for changes
+            touch $DEPLOY_DIR/server.js
+
+            echo "Files deployed at $(date)"
+            echo "Entry point: $DEPLOY_DIR/server.js"
+            ls -lh $DEPLOY_DIR/server.js
