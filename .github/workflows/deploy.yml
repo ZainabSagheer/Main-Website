@@ -58,6 +58,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
           port: 65002
           use_insecure_cipher: true
+          debug: true
           script: |
             mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs
 
@@ -69,6 +70,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
           port: 65002
           use_insecure_cipher: true
+          debug: true
           source: "deploy.tar.gz"
           target: /home/u293105347/domains/bitsolmarketing.com/
 
@@ -80,6 +82,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
           port: 65002
           use_insecure_cipher: true
+          debug: true
           script: |
             set -e
             DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
