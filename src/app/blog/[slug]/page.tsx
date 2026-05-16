@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, User, Clock, Tag } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -153,11 +154,12 @@ export default async function BlogPostPage({
 
           {/* Featured Image */}
           {post.image && (
-            <div className="mb-12 rounded-2xl overflow-hidden aspect-video">
-              <img
+            <div className="mb-12 rounded-2xl overflow-hidden aspect-video relative">
+              <Image
                 src={post.image}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
           )}

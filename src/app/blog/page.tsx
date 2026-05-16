@@ -2,8 +2,10 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import { ArrowRight, Calendar, User, Tag } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -107,10 +109,11 @@ export default async function BlogPage() {
                     {/* Image */}
                     <div className="relative aspect-video overflow-hidden rounded-t-xl bg-gradient-to-br from-brand-dark to-brand-slate">
                       {post.image ? (
-                        <img
+                        <Image
                           src={post.image}
                           alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
@@ -154,14 +157,15 @@ export default async function BlogPage() {
                         </span>
                       </div>
 
-                      <Link href={`/blog/${post.slug}`} className="w-full mt-6">
-                        <Button
-                          variant="brand"
-                          className="w-full rounded-full py-5 font-bold group/btn"
-                        >
-                          Read Article{" "}
-                          <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                        </Button>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className={cn(
+                          buttonVariants({ variant: "brand" }),
+                          "w-full rounded-full py-5 font-bold group/btn mt-6"
+                        )}
+                      >
+                        Read Article{" "}
+                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
                     </div>
                   </div>
