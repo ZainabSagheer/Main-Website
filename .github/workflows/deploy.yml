@@ -58,16 +58,22 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
       - name: Ensure target directory exists
+        env:
+          SSHPASS: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
         run: |
-          sshpass -p "${{ secrets.HOSTINGER_SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -p 65002 u293105347@92.113.19.228 "mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs"
+          sshpass -e ssh -o StrictHostKeyChecking=no -p 65002 u293105347@92.113.19.228 "mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs"
 
       - name: Upload tarball to Hostinger
+        env:
+          SSHPASS: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
         run: |
-          sshpass -p "${{ secrets.HOSTINGER_SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -P 65002 deploy.tar.gz u293105347@92.113.19.228:/home/u293105347/domains/bitsolmarketing.com/
+          sshpass -e scp -o StrictHostKeyChecking=no -P 65002 deploy.tar.gz u293105347@92.113.19.228:/home/u293105347/domains/bitsolmarketing.com/
 
       - name: Extract and finalize on Hostinger
+        env:
+          SSHPASS: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
         run: |
-          sshpass -p "${{ secrets.HOSTINGER_SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -p 65002 u293105347@92.113.19.228 << 'EOF'
+          sshpass -e ssh -o StrictHostKeyChecking=no -p 65002 u293105347@92.113.19.228 << 'EOF'
             set -e
             DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
             TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
