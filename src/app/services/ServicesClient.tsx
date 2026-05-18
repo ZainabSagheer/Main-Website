@@ -12,20 +12,27 @@ export default function ServicesPage() {
     <div className="pt-32 pb-24">
       {/* Header */}
       <section className="container mx-auto px-6 mb-32 text-center">
-        <motion.h1 
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-4"
+        >
+          AI Digital Marketing Agency — Pakistan
+        </motion.p>
+        <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="text-6xl md:text-8xl font-bold mb-8 text-slate-900 dark:text-white"
         >
-          Our <span className="text-gradient">Solutions</span>
+          AI Marketing <span className="text-gradient">Services</span>
         </motion.h1>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="text-xl text-black dark:text-brand-muted max-w-3xl mx-auto"
         >
-          We provide the technical foundation and strategic intelligence needed to dominate the modern digital landscape.
+          Full-service AI digital marketing for businesses in Pakistan and globally — SEO, paid ads, automation, web development, mobile apps, and trading technology.
         </motion.p>
       </section>
 

@@ -27,11 +27,14 @@ export function SplineSceneBasic() {
       <div className="flex h-full flex-col md:flex-row container mx-auto px-6 relative z-10">
         {/* Left content */}
         <div className="flex-1 p-12 relative z-10 flex flex-col justify-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-4">
+            Pakistan&apos;s Premier AI Digital Marketing Agency
+          </p>
           <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-500 dark:from-neutral-50 dark:to-neutral-400 mb-6">
             BITSOL <span className="text-brand-cyan">Marketing</span>
           </h1>
           <p className="mt-4 text-black dark:text-neutral-300 max-w-lg text-lg leading-relaxed mb-10">
-            Architecting intelligent digital ecosystems and AI-powered marketing solutions that drive exponential growth for the world's most ambitious brands.
+            AI-powered SEO, Meta ads, chatbot development, and growth marketing for ambitious businesses in Pakistan and worldwide. We turn clicks into clients.
           </p>
           
           <div className="flex gap-4">

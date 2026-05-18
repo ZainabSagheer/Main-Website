@@ -94,20 +94,56 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script
-          id="json-ld"
+          id="json-ld-org"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": ["Organization", "ProfessionalService"],
               "name": "BITSOL Marketing PVT LTD",
+              "alternateName": "BITSOL Marketing",
               "url": "https://bitsolmarketing.com",
-              "logo": "https://bitsolmarketing.com/logo.png",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://bitsolmarketing.com/logo.png",
+                "width": 200,
+                "height": 60
+              },
+              "description": "Pakistan's premier AI digital marketing agency offering SEO, Meta Ads, AI automation, web development, mobile apps, and algorithmic trading technology.",
+              "foundingDate": "2023",
+              "areaServed": [
+                { "@type": "Country", "name": "Pakistan" },
+                { "@type": "City", "name": "Karachi" },
+                { "@type": "City", "name": "Lahore" },
+                { "@type": "City", "name": "Islamabad" }
+              ],
+              "serviceType": [
+                "AI Digital Marketing",
+                "SEO Services",
+                "Meta Ads Management",
+                "Google Ads Management",
+                "AI Automation",
+                "Web Development",
+                "Mobile App Development",
+                "Algorithmic Trading Software"
+              ],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "BITSOL Marketing Services",
+                "itemListElement": [
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Optimization" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile Apps" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trading Tech" } }
+                ]
+              },
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+92-310-317-5175",
                 "contactType": "customer service",
-                "areaServed": "WW",
+                "areaServed": ["PK", "AE", "GB", "US"],
                 "availableLanguage": ["English", "Urdu"]
               },
               "sameAs": [
@@ -115,6 +151,26 @@ export default function RootLayout({
                 "https://www.linkedin.com/company/bitsolpvtltd/",
                 "https://www.instagram.com/bitsolmarketing"
               ]
+            }),
+          }}
+        />
+        <Script
+          id="json-ld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "BITSOL Marketing",
+              "url": "https://bitsolmarketing.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://bitsolmarketing.com/blog?q={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              }
             }),
           }}
         />

@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { projects } from '@/lib/portfolio';
+import { services } from '@/lib/services';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = "force-dynamic";
@@ -21,11 +22,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/privacy',
     '/cookies',
     '/compliance',
+    '/digital-marketing-agency-karachi',
+    '/digital-marketing-agency-lahore',
+    '/digital-marketing-agency-islamabad',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1.0 : route === '/blog' ? 0.9 : 0.8,
+    priority: route === '' ? 1.0 : route === '/blog' ? 0.9 : route.startsWith('/digital-marketing') ? 0.85 : 0.8,
+  }));
+
+  const servicePages = services.map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
   }));
 
   const portfolioPages = projects.map((project) => ({
@@ -52,5 +63,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // DB unavailable at build time — skip blog entries
   }
 
-  return [...staticPages, ...portfolioPages, ...blogPages];
+  return [...staticPages, ...servicePages, ...portfolioPages, ...blogPages];
 }
