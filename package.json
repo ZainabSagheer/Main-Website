@@ -6,7 +6,7 @@
     "dev": "node node_modules/next/dist/bin/next dev --turbopack",
     "build": "node node_modules/next/dist/bin/next build",
     "build:hostinger": "npm run build && node prepare-hostinger.mjs",
-    "start": "node server.js",
+    "start": "node node_modules/next/dist/bin/next start",
     "lint": "eslint",
     "postinstall": "prisma generate"
   },
