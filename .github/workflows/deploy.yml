@@ -54,28 +54,25 @@ jobs:
           cd .next/standalone
           tar -czf ../../deploy.tar.gz .
 
-      - name: Setup SSH key
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          # %b interprets \n escape sequences as real newlines
-          printf '%b' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
-          echo "" >> ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p 65002 92.113.19.228 >> ~/.ssh/known_hosts
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add Hostinger to known hosts
+        run: ssh-keyscan -p 65002 92.113.19.228 >> ~/.ssh/known_hosts
 
       - name: Ensure target directory exists
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p 65002 u293105347@92.113.19.228 "mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs"
+          ssh -o StrictHostKeyChecking=no -p 65002 u293105347@92.113.19.228 "mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs"
 
       - name: Upload tarball to Hostinger
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -P 65002 deploy.tar.gz u293105347@92.113.19.228:/home/u293105347/domains/bitsolmarketing.com/
+          scp -o StrictHostKeyChecking=no -P 65002 deploy.tar.gz u293105347@92.113.19.228:/home/u293105347/domains/bitsolmarketing.com/
 
       - name: Extract and finalize on Hostinger
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p 65002 u293105347@92.113.19.228 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -p 65002 u293105347@92.113.19.228 << 'EOF'
             set -e
             DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
             TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
