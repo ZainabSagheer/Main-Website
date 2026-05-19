@@ -37,6 +37,7 @@ jobs:
         run: |
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
+          cp -r prisma .next/standalone/prisma || true
 
       - name: Write .env to standalone
         run: |
@@ -83,6 +84,11 @@ jobs:
             mkdir -p $DEPLOY_DIR
             tar -xzf $TAR_FILE -C $DEPLOY_DIR
             rm -f $TAR_FILE
+
+            # Fix Prisma Engine on Hostinger
+            cd $DEPLOY_DIR
+            npm install prisma @prisma/client
+            npx prisma generate
 
             # Phusion Passenger graceful-restart signal
             mkdir -p $DEPLOY_DIR/tmp
