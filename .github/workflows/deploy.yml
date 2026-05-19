@@ -60,7 +60,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Add Hostinger to known hosts
-        run: ssh-keyscan -p 65002 145.79.30.66 >> ~/.ssh/known_hosts
+        run: ssh-keyscan -p 65002 145.79.30.66 >> ~/.ssh/known_hosts || true
 
       - name: Ensure target directory exists
         run: |
