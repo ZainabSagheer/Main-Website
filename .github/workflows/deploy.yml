@@ -53,6 +53,13 @@ jobs:
           cd .next/standalone
           tar -czf ../../deploy.tar.gz .
 
+      - name: Upload Tarball as Artifact (Fallback)
+        uses: actions/upload-artifact@v4
+        with:
+          name: hostinger-deploy-bundle
+          path: deploy.tar.gz
+          retention-days: 1
+
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
