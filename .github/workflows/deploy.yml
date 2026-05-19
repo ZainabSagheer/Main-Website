@@ -87,7 +87,7 @@ jobs:
 
             # Fix Prisma Engine on Hostinger
             cd $DEPLOY_DIR
-            npm install prisma @prisma/client
+            npm install prisma@6 @prisma/client@6
             npx prisma generate
 
             # Phusion Passenger graceful-restart signal
