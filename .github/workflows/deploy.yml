@@ -54,12 +54,13 @@ jobs:
           tar -czf ../../deploy.tar.gz .
 
       - name: Setup SSH key
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          echo "" >> ~/.ssh/deploy_key  # Force a trailing newline
+          cat << 'END_OF_KEY' > ~/.ssh/deploy_key.tmp
+          ${{ secrets.SSH_PRIVATE_KEY }}
+          END_OF_KEY
+          tr -d '\r' < ~/.ssh/deploy_key.tmp > ~/.ssh/deploy_key
+          echo "" >> ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p 65002 145.79.30.66 >> ~/.ssh/known_hosts
 
