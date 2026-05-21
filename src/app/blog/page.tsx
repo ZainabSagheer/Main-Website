@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: "Blog | AI Marketing Insights & SEO Strategies",
   description:
     "Expert insights on AI digital marketing, SEO strategies, automation, and business growth from the BITSOL MARKETING team.",
+  alternates: { canonical: "https://bitsolmarketing.com/blog" },
   openGraph: {
     title: "Blog | BITSOL MARKETING",
     description:
@@ -55,16 +56,23 @@ export default async function BlogPage() {
   let posts: any[] = [];
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://admin.bitsolmarketing.com";
-    const res = await fetch(`${apiUrl}/api/blogs?published=true`, {
-      next: { revalidate: 60 } // Revalidate every minute
+    posts = await prisma.blog.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        author: true,
+        image: true,
+        excerpt: true,
+        content: true,
+        tags: true,
+        createdAt: true,
+      },
     });
-    
-    if (res.ok) {
-      posts = await res.json();
-    }
   } catch (err) {
-    console.error("[Blog] API connection failed:", err);
+    console.error("[Blog] Database query failed:", err);
   }
 
   return (

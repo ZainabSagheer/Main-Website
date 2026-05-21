@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | BITSOL Marketing",
+  description:
+    "Read BITSOL Marketing's Terms of Service governing use of our digital marketing, AI automation, and web development services.",
+  alternates: { canonical: "https://bitsolmarketing.com/terms" },
+  robots: { index: false, follow: false },
+};
 
 export default function TermsPage() {
   return (

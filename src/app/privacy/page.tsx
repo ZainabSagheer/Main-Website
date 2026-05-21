@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | BITSOL Marketing",
+  description:
+    "BITSOL Marketing's Privacy Policy — how we collect, use, and protect your personal data.",
+  alternates: { canonical: "https://bitsolmarketing.com/privacy" },
+  robots: { index: false, follow: false },
+};
 
 export default function PrivacyPage() {
   return (

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { 
   LayoutDashboard, 
@@ -18,16 +19,17 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import BlogManager from "@/components/admin/BlogManager";
 
 const sidebarLinks = [
-  { icon: LayoutDashboard, label: "Dashboard", active: true },
-  { icon: Users, label: "User Management" },
-  { icon: Briefcase, label: "Leads & CRM" },
-  { icon: GraduationCap, label: "Course Manager" },
-  { icon: FileText, label: "Blog & Content" },
-  { icon: TrendingUp, label: "Finance" },
-  { icon: MessageSquare, label: "Support" },
-  { icon: Settings, label: "Settings" },
+  { icon: LayoutDashboard, label: "Dashboard", id: "dashboard" },
+  { icon: Users, label: "User Management", id: "users" },
+  { icon: Briefcase, label: "Leads & CRM", id: "crm" },
+  { icon: GraduationCap, label: "Course Manager", id: "courses" },
+  { icon: FileText, label: "Blog & Content", id: "blogs" },
+  { icon: TrendingUp, label: "Finance", id: "finance" },
+  { icon: MessageSquare, label: "Support", id: "support" },
+  { icon: Settings, label: "Settings", id: "settings" },
 ];
 
 const stats = [
@@ -38,6 +40,8 @@ const stats = [
 ];
 
 export default function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState("dashboard");
+
   return (
     <div className="flex h-screen bg-[#050816] text-white overflow-hidden">
       {/* Sidebar */}
@@ -48,11 +52,12 @@ export default function AdminDashboard() {
         </div>
 
         <nav className="flex-grow space-y-2">
-          {sidebarLinks.map((link, i) => (
+          {sidebarLinks.map((link) => (
             <button
-              key={i}
+              key={link.id}
+              onClick={() => setActiveTab(link.id)}
               className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${
-                link.active ? "bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20" : "text-brand-muted hover:bg-white/5 hover:text-white"
+                activeTab === link.id ? "bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20" : "text-brand-muted hover:bg-white/5 hover:text-white"
               }`}
             >
               <link.icon className="w-5 h-5" />
@@ -72,7 +77,9 @@ export default function AdminDashboard() {
         {/* Header */}
         <header className="flex justify-between items-center mb-12">
           <div>
-            <h1 className="text-3xl font-bold mb-1">System Overview</h1>
+            <h1 className="text-3xl font-bold mb-1">
+              {sidebarLinks.find(l => l.id === activeTab)?.label || "System Overview"}
+            </h1>
             <p className="text-brand-muted">Welcome back, Super Admin.</p>
           </div>
           <div className="flex items-center gap-6">
@@ -80,7 +87,7 @@ export default function AdminDashboard() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-muted" />
               <input 
                 placeholder="Search analytics..." 
-                className="bg-white/5 border border-white/10 rounded-full pl-10 pr-6 py-2 text-sm focus:outline-none focus:border-brand-cyan transition-all w-64"
+                className="bg-white/5 border border-white/10 rounded-full pl-10 pr-6 py-2 text-sm focus:outline-none focus:border-brand-cyan transition-all w-64 text-white"
               />
             </div>
             <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center relative hover:bg-white/10 transition-all">
@@ -93,95 +100,110 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {stats.map((stat, i) => (
-            <Card key={i} className="bg-[#0F172A]/50 backdrop-blur-md border-white/5 border">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-brand-muted">{stat.label}</CardTitle>
+        {/* Tab Content */}
+        {activeTab === "dashboard" && (
+          <div className="space-y-12">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {stats.map((stat, i) => (
+                <Card key={i} className="bg-[#0F172A]/50 backdrop-blur-md border-white/5 border">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-brand-muted">{stat.label}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-3xl font-bold mb-2">{stat.value}</div>
+                    <div className="text-xs text-brand-cyan font-bold">{stat.growth} vs last month</div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Main Charts Mockup */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <Card className="lg:col-span-2 bg-[#0F172A]/50 backdrop-blur-md border-white/5 border h-[400px]">
+                <CardHeader>
+                  <CardTitle>Revenue Analytics</CardTitle>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-full pb-20">
+                  <div className="w-full flex items-end gap-3 px-10 h-full">
+                      {[30, 45, 25, 60, 80, 55, 90, 70, 40, 85, 100, 75].map((h, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ height: 0 }}
+                          animate={{ height: `${h}%` }}
+                          className="flex-1 bg-gradient-to-t from-brand-cyan/20 to-brand-cyan rounded-t-lg"
+                        />
+                      ))}
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-[#0F172A]/50 backdrop-blur-md border-white/5 border h-[400px]">
+                <CardHeader>
+                    <CardTitle>Traffic Distribution</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-6 pt-10">
+                    {[
+                      { label: "Search Engine", value: 45, color: "bg-brand-cyan" },
+                      { label: "Social Media", value: 30, color: "bg-brand-purple" },
+                      { label: "Direct", value: 25, color: "bg-brand-muted" },
+                    ].map((item, i) => (
+                      <div key={i}>
+                        <div className="flex justify-between text-sm mb-2">
+                          <span>{item.label}</span>
+                          <span className="font-bold">{item.value}%</span>
+                        </div>
+                        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            animate={{ width: `${item.value}%` }}
+                            className={`h-full ${item.color}`}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Recent Activity */}
+            <Card className="bg-[#0F172A]/50 backdrop-blur-md border-white/5 border">
+              <CardHeader>
+                <CardTitle>Recent Project Activity</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold mb-2">{stat.value}</div>
-                <div className="text-xs text-brand-cyan font-bold">{stat.growth} vs last month</div>
+                <div className="space-y-6">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="flex items-center justify-between py-4 border-b border-white/5 last:border-0">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-lg bg-brand-cyan/10 flex items-center justify-center text-brand-cyan font-bold">P{i}</div>
+                          <div>
+                            <div className="font-bold">Project Neo-Sync v2.{i}</div>
+                            <div className="text-xs text-brand-muted">Client: Cyber Systems Ltd. • Updated 2h ago</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <Badge className="bg-brand-cyan/20 text-brand-cyan border-0">In Progress</Badge>
+                          <Button variant="ghost" size="sm">Details</Button>
+                        </div>
+                      </div>
+                    ))}
+                </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
+          </div>
+        )}
 
-        {/* Main Charts Mockup */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          <Card className="lg:col-span-2 bg-[#0F172A]/50 backdrop-blur-md border-white/5 border h-[400px]">
-            <CardHeader>
-              <CardTitle>Revenue Analytics</CardTitle>
-            </CardHeader>
-            <CardContent className="flex items-center justify-center h-full pb-20">
-               {/* Visual Mockup for Chart */}
-               <div className="w-full flex items-end gap-3 px-10 h-full">
-                  {[30, 45, 25, 60, 80, 55, 90, 70, 40, 85, 100, 75].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ height: 0 }}
-                      animate={{ height: `${h}%` }}
-                      className="flex-1 bg-gradient-to-t from-brand-cyan/20 to-brand-cyan rounded-t-lg"
-                    />
-                  ))}
-               </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-[#0F172A]/50 backdrop-blur-md border-white/5 border h-[400px]">
-             <CardHeader>
-                <CardTitle>Traffic Distribution</CardTitle>
-             </CardHeader>
-             <CardContent className="flex flex-col gap-6 pt-10">
-                {[
-                  { label: "Search Engine", value: 45, color: "bg-brand-cyan" },
-                  { label: "Social Media", value: 30, color: "bg-brand-purple" },
-                  { label: "Direct", value: 25, color: "bg-brand-muted" },
-                ].map((item, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span>{item.label}</span>
-                      <span className="font-bold">{item.value}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        animate={{ width: `${item.value}%` }}
-                        className={`h-full ${item.color}`}
-                      />
-                    </div>
-                  </div>
-                ))}
-             </CardContent>
-          </Card>
-        </div>
-
-        {/* Recent Activity */}
-        <Card className="bg-[#0F172A]/50 backdrop-blur-md border-white/5 border">
-          <CardHeader>
-            <CardTitle>Recent Project Activity</CardTitle>
-          </CardHeader>
-          <CardContent>
-             <div className="space-y-6">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="flex items-center justify-between py-4 border-b border-white/5 last:border-0">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-brand-cyan/10 flex items-center justify-center text-brand-cyan font-bold">P{i}</div>
-                      <div>
-                        <div className="font-bold">Project Neo-Sync v2.{i}</div>
-                        <div className="text-xs text-brand-muted">Client: Cyber Systems Ltd. • Updated 2h ago</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <Badge className="bg-brand-cyan/20 text-brand-cyan border-0">In Progress</Badge>
-                      <Button variant="ghost" size="sm">Details</Button>
-                    </div>
-                  </div>
-                ))}
-             </div>
-          </CardContent>
-        </Card>
+        {activeTab === "blogs" && <BlogManager />}
+        
+        {activeTab !== "dashboard" && activeTab !== "blogs" && (
+          <div className="flex items-center justify-center h-64 border border-dashed border-white/10 rounded-xl bg-white/5">
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-2">Coming Soon</h3>
+              <p className="text-brand-muted">This module is under development.</p>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

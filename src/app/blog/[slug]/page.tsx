@@ -15,16 +15,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  
+
   let post: any = null;
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://admin.bitsolmarketing.com";
-    const res = await fetch(`${apiUrl}/api/blogs/${slug}`);
-    if (res.ok) {
-      post = await res.json();
-    }
+    post = await prisma.blog.findUnique({ where: { slug } });
   } catch (err) {
-    console.error("[Blog Meta] API connection failed:", err);
+    console.error("[Blog Meta] Database query failed:", err);
   }
 
   if (!post) return {};
@@ -35,6 +31,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description,
+    alternates: { canonical: `https://bitsolmarketing.com/blog/${slug}` },
     openGraph: {
       title: post.title,
       description,
@@ -71,15 +68,9 @@ export default async function BlogPostPage({
   const { slug } = await params;
   let post: any = null;
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://admin.bitsolmarketing.com";
-    const res = await fetch(`${apiUrl}/api/blogs/${slug}`, {
-      next: { revalidate: 60 } // Revalidate every minute
-    });
-    if (res.ok) {
-      post = await res.json();
-    }
+    post = await prisma.blog.findUnique({ where: { slug } });
   } catch (err) {
-    console.error("[Blog] API connection failed:", err);
+    console.error("[Blog] Database query failed:", err);
   }
 
   if (!post) notFound();
@@ -184,7 +175,7 @@ export default async function BlogPostPage({
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-slate-200 dark:border-white/10">
-              {post.tags.map((tag) => (
+              {post.tags.map((tag: string) => (
                 <span
                   key={tag}
                   className="text-xs font-bold uppercase tracking-tighter px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-brand-muted border border-slate-200 dark:border-white/10"
