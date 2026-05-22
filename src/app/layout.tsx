@@ -68,6 +68,9 @@ export const metadata: Metadata = {
       "AI SEO, chatbot development, Meta ads & automation for businesses in Pakistan and worldwide.",
     images: ["https://bitsolmarketing.com/opengraph-image"],
   },
+  other: {
+    "google-adsense-account": "ca-pub-1169060175340707",
+  },
   robots: {
     index: true,
     follow: true,
