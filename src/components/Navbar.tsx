@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -20,11 +19,12 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolled(latest > 50);
-  });
+  useEffect(() => {
+    const handler = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
 
   return (
     <nav
@@ -60,6 +60,8 @@ export default function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button
+          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMobileMenuOpen}
           className="md:hidden text-slate-900 dark:text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -69,11 +71,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-white/10 p-6 flex flex-col gap-6 shadow-2xl transition-colors duration-500"
-        >
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-brand-dark border-b border-slate-200 dark:border-white/10 p-6 flex flex-col gap-6 shadow-2xl transition-colors duration-500 animate-in fade-in slide-in-from-top-2 duration-200">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -89,7 +87,7 @@ export default function Navbar() {
               Get Started
             </Button>
           </Link>
-        </motion.div>
+        </div>
       )}
     </nav>
   );

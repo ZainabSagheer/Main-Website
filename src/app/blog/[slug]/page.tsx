@@ -161,6 +161,7 @@ export default async function BlogPostPage({
                 src={post.image}
                 alt={post.title}
                 fill
+                unoptimized
                 className="object-cover"
               />
             </div>

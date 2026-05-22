@@ -114,6 +114,7 @@ export default async function BlogPage() {
                           src={post.image}
                           alt={post.title}
                           fill
+                          unoptimized
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       ) : (
