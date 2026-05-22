@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import MacOSDock from "@/components/ui/mac-os-dock";
-import { 
-  Search, 
-  Moon, 
-  Sun, 
-  MessageSquare, 
-  Home, 
+import {
+  Search,
+  Moon,
+  Sun,
+  MessageSquare,
+  Home,
   X,
   LayoutGrid
 } from "lucide-react";
+import { DIcons } from "dicons";
 import SearchComponent from "@/components/ui/animated-glowing-search-bar";
 import { useRouter } from "next/navigation";
 
@@ -51,6 +52,11 @@ export function FloatingDock() {
       icon: theme === "dark" ? <Sun className="w-6 h-6 text-yellow-400" /> : <Moon className="w-6 h-6 text-slate-700" />
     },
     {
+      id: "whatsapp",
+      name: "WhatsApp",
+      icon: <DIcons.WhatsApp className="w-6 h-6 text-green-500" />
+    },
+    {
       id: "contact",
       name: "Contact Us",
       icon: <MessageSquare className="w-6 h-6 text-brand-purple" />
@@ -70,6 +76,9 @@ export function FloatingDock() {
         break;
       case "theme":
         setTheme(theme === "dark" ? "light" : "dark");
+        break;
+      case "whatsapp":
+        window.open("https://wa.me/923120141581", "_blank");
         break;
       case "contact":
         const event = new CustomEvent("open-contact-popup");

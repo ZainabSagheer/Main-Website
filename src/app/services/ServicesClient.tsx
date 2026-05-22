@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { DIcons } from "dicons";
 
 export default function ServicesPage() {
   return (
@@ -71,11 +72,23 @@ export default function ServicesPage() {
                     ))}
                   </ul>
 
-                  <Link href={`/services/${service.slug}`} className="w-full">
-                    <Button variant="brand" className="w-full rounded-full py-6 text-lg font-bold">
-                      Explore {service.title} <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </Link>
+                  <div className="flex flex-col gap-3">
+                    <Link href={`/services/${service.slug}`} className="w-full">
+                      <Button variant="brand" className="w-full rounded-full py-6 text-lg font-bold">
+                        Explore {service.title} <ArrowRight className="ml-2 w-5 h-5" />
+                      </Button>
+                    </Link>
+                    <a
+                      href={`https://wa.me/923120141581?text=${encodeURIComponent(`Hello BITSOL Marketing! I'm interested in ordering your ${service.title} service. Please get in touch.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <Button variant="outline" className="w-full rounded-full py-6 text-lg font-bold border-green-500 text-green-600 hover:bg-green-500/10 dark:text-green-400">
+                        <DIcons.WhatsApp className="mr-2 w-5 h-5" /> Order via WhatsApp
+                      </Button>
+                    </a>
+                  </div>
                 </div>
               </GlowingCard>
             </motion.div>

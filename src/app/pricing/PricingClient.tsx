@@ -5,6 +5,7 @@ import { CheckCircle2, Zap, Rocket, Building2, ArrowRight, HelpCircle, ChevronDo
 import { Button } from "@/components/ui/button";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import Link from "next/link";
+import { DIcons } from "dicons";
 
 const plans = [
   {
@@ -189,15 +190,21 @@ export default function PricingClient() {
                       ))}
                     </ul>
 
-                    <Link href="/contact">
+                    <a
+                      href={`https://wa.me/923120141581?text=${encodeURIComponent(`Hello BITSOL Marketing! I'd like to order the ${plan.name} plan (${plan.price}${plan.period}). Please get in touch.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
                       <Button
                         variant={plan.popular ? "brand" : "outline"}
                         className="w-full rounded-full py-6 text-base font-bold group"
                       >
-                        {plan.name === "Enterprise" ? "Get a Custom Quote" : "Get Started"}
+                        <DIcons.WhatsApp className="w-4 h-4 mr-2" />
+                        {plan.name === "Enterprise" ? "Get a Custom Quote" : "Order via WhatsApp"}
                         <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                       </Button>
-                    </Link>
+                    </a>
                   </div>
                 </GlowingCard>
               </motion.div>
@@ -284,12 +291,17 @@ export default function PricingClient() {
             <p className="text-brand-muted text-lg mb-10 max-w-2xl mx-auto">
               Book a free 30-minute strategy call. We&apos;ll audit your business, understand your goals, and recommend the exact package that makes sense — no pressure, no obligation.
             </p>
-            <Link href="/contact">
+            <a
+              href={`https://wa.me/923120141581?text=${encodeURIComponent("Hello BITSOL Marketing! I'd like to book a free strategy call to discuss your services.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button variant="brand" className="rounded-full px-10 py-6 text-lg font-bold group">
+                <DIcons.WhatsApp className="w-5 h-5 mr-2" />
                 Book a Free Strategy Call
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
-            </Link>
+            </a>
           </div>
         </GlowingCard>
       </section>

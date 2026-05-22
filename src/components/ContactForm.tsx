@@ -17,6 +17,15 @@ export function ContactForm() {
     message: ""
   });
 
+  const serviceLabels: Record<string, string> = {
+    ai: "AI Automation",
+    marketing: "Digital Marketing",
+    web: "Web Development",
+    mobile: "Mobile Apps",
+    seo: "SEO Optimization",
+    trading: "Trading Tech",
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -32,6 +41,10 @@ export function ContactForm() {
       if (!response.ok) throw new Error("Failed to send inquiry");
 
       setIsSubmitted(true);
+
+      const serviceLabel = serviceLabels[formData.service] || formData.service;
+      const waMsg = `Hello BITSOL Marketing! I just submitted an inquiry.\n\nName: ${formData.name}\nEmail: ${formData.email}\nService: ${serviceLabel}\nMessage: ${formData.message}`;
+      window.open(`https://wa.me/923120141581?text=${encodeURIComponent(waMsg)}`, "_blank");
     } catch (err) {
       setError("Something went wrong. Please try again or contact us directly.");
     } finally {
