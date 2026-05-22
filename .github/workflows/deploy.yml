@@ -73,31 +73,41 @@ jobs:
           path: deploy.tar.gz
           retention-days: 3
 
-      - name: Upload tarball to Hostinger
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: 145.79.30.66
-          username: u293105347
-          port: 65002
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: deploy.tar.gz
-          target: /home/u293105347/domains/bitsolmarketing.com/
+      - name: Upload tarball to Hostinger via SFTP
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          KEYFILE=$(mktemp)
+          echo "$SSH_KEY" > "$KEYFILE"
+          chmod 600 "$KEYFILE"
+          sftp -P 65002 -i "$KEYFILE" \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            -b - u293105347@145.79.30.66 << 'SFTP_EOF'
+          put deploy.tar.gz /home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
+          SFTP_EOF
+          rm -f "$KEYFILE"
 
-      - name: Extract and restart on Hostinger
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: 145.79.30.66
-          username: u293105347
-          port: 65002
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
-            TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
-            mkdir -p $DEPLOY_DIR
-            rm -rf ${DEPLOY_DIR}_old
-            mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true
-            mkdir -p $DEPLOY_DIR
-            tar -xzf $TAR_FILE -C $DEPLOY_DIR && rm -f $TAR_FILE
-            cd $DEPLOY_DIR && npm install --no-save prisma@6 @prisma/client@6 2>/dev/null || true && npx prisma generate 2>/dev/null || true
-            mkdir -p $DEPLOY_DIR/tmp && touch $DEPLOY_DIR/tmp/restart.txt
-            echo "Deployed at $(date)"
+      - name: Extract and restart on Hostinger via SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          KEYFILE=$(mktemp)
+          echo "$SSH_KEY" > "$KEYFILE"
+          chmod 600 "$KEYFILE"
+          ssh -p 65002 -i "$KEYFILE" \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            u293105347@145.79.30.66 bash << 'ENDSSH'
+          DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
+          TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
+          mkdir -p $DEPLOY_DIR
+          rm -rf ${DEPLOY_DIR}_old
+          mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true
+          mkdir -p $DEPLOY_DIR
+          tar -xzf $TAR_FILE -C $DEPLOY_DIR && rm -f $TAR_FILE
+          cd $DEPLOY_DIR && npm install --no-save prisma@6 @prisma/client@6 2>/dev/null || true && npx prisma generate 2>/dev/null || true
+          mkdir -p $DEPLOY_DIR/tmp && touch $DEPLOY_DIR/tmp/restart.txt
+          echo "Deployed at $(date)"
+          ENDSSH
+          rm -f "$KEYFILE"
