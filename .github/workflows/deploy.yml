@@ -78,7 +78,7 @@ jobs:
 
       - name: Ensure target directory exists
         env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
           sshpass -e ssh -o StrictHostKeyChecking=no -p 65002 \
             u293105347@145.79.30.66 \
@@ -86,7 +86,7 @@ jobs:
 
       - name: Upload tarball to Hostinger
         env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
           sshpass -e scp -o StrictHostKeyChecking=no -P 65002 \
             deploy.tar.gz \
@@ -94,7 +94,7 @@ jobs:
 
       - name: Extract and restart on Hostinger
         env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
           DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
           TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
