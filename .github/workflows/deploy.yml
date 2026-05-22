@@ -76,32 +76,34 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
-      - name: Ensure target directory exists
+      - name: Setup SSH password file
         env:
-          SSHPASS: ${{ secrets.SSH_PASSWORD }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -e ssh -o StrictHostKeyChecking=no -p 65002 \
+          printf '%s' "$SSH_PASSWORD" > /tmp/.sshpass
+          chmod 600 /tmp/.sshpass
+
+      - name: Ensure target directory exists
+        run: |
+          sshpass -f /tmp/.sshpass ssh -o StrictHostKeyChecking=no -p 65002 \
             u293105347@145.79.30.66 \
             "mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs"
 
       - name: Upload tarball to Hostinger
-        env:
-          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -e scp -o StrictHostKeyChecking=no -P 65002 \
+          sshpass -f /tmp/.sshpass scp -o StrictHostKeyChecking=no -P 65002 \
             deploy.tar.gz \
             u293105347@145.79.30.66:/home/u293105347/domains/bitsolmarketing.com/
 
       - name: Extract and restart on Hostinger
-        env:
-          SSHPASS: ${{ secrets.SSH_PASSWORD }}
         run: |
           DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
           TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
-          SSH="sshpass -e ssh -o StrictHostKeyChecking=no -p 65002 u293105347@145.79.30.66"
+          SSH="sshpass -f /tmp/.sshpass ssh -o StrictHostKeyChecking=no -p 65002 u293105347@145.79.30.66"
 
           $SSH "rm -rf ${DEPLOY_DIR}_old; mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true; mkdir -p $DEPLOY_DIR"
           $SSH "tar -xzf $TAR_FILE -C $DEPLOY_DIR && rm -f $TAR_FILE"
           $SSH "cd $DEPLOY_DIR && npm install --no-save prisma@6 @prisma/client@6 2>/dev/null || true && npx prisma generate 2>/dev/null || true"
           $SSH "mkdir -p $DEPLOY_DIR/tmp && touch $DEPLOY_DIR/tmp/restart.txt"
           $SSH "echo 'Deployed at $(date)'"
+          rm -f /tmp/.sshpass
