@@ -73,45 +73,35 @@ jobs:
           path: deploy.tar.gz
           retention-days: 3
 
-      - name: Setup SSH key
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          # Handle keys stored with literal \n OR real newlines, strip Windows \r
-          printf '%s' "$SSH_PRIVATE_KEY" | sed 's/\\n/\n/g' | tr -d '\r' > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          # Validate key is parseable before attempting to use it
-          ssh-keygen -y -f ~/.ssh/deploy_key > ~/.ssh/deploy_key.pub
-          echo "Key fingerprint in use:"
-          ssh-keygen -lf ~/.ssh/deploy_key
-          ssh-keyscan -p 65002 145.79.30.66 >> ~/.ssh/known_hosts 2>/dev/null
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
 
       - name: Ensure target directory exists
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p 65002 \
+          sshpass -e ssh -o StrictHostKeyChecking=no -p 65002 \
             u293105347@145.79.30.66 \
             "mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs"
 
       - name: Upload tarball to Hostinger
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -P 65002 \
+          sshpass -e scp -o StrictHostKeyChecking=no -P 65002 \
             deploy.tar.gz \
             u293105347@145.79.30.66:/home/u293105347/domains/bitsolmarketing.com/
 
       - name: Extract and restart on Hostinger
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
           DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
           TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
-          SSH="ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -p 65002 u293105347@145.79.30.66"
+          SSH="sshpass -e ssh -o StrictHostKeyChecking=no -p 65002 u293105347@145.79.30.66"
 
-          # Atomic swap
           $SSH "rm -rf ${DEPLOY_DIR}_old; mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true; mkdir -p $DEPLOY_DIR"
           $SSH "tar -xzf $TAR_FILE -C $DEPLOY_DIR && rm -f $TAR_FILE"
-
-          # Regenerate Prisma client for Hostinger's exact OS
           $SSH "cd $DEPLOY_DIR && npm install --no-save prisma@6 @prisma/client@6 2>/dev/null || true && npx prisma generate 2>/dev/null || true"
-
-          # Phusion Passenger graceful restart
           $SSH "mkdir -p $DEPLOY_DIR/tmp && touch $DEPLOY_DIR/tmp/restart.txt"
           $SSH "echo 'Deployed at $(date)'"
