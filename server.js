@@ -1,17 +1,19 @@
-const fs = require('fs');
-const path = require('path');
+const { createServer } = require('http');
+const { parse } = require('url');
+const next = require('next');
 
-const standaloneDir = path.join(__dirname, '.next', 'standalone');
-const staticSrc = path.join(__dirname, '.next', 'static');
-const staticDest = path.join(standaloneDir, '.next', 'static');
-const publicSrc = path.join(__dirname, 'public');
-const publicDest = path.join(standaloneDir, 'public');
+const port = parseInt(process.env.PORT || '3000', 10);
+const app = next({ dev: false, dir: __dirname });
+const handle = app.getRequestHandler();
 
-if (fs.existsSync(staticSrc) && !fs.existsSync(staticDest)) {
-  fs.cpSync(staticSrc, staticDest, { recursive: true });
-}
-if (fs.existsSync(publicSrc) && !fs.existsSync(publicDest)) {
-  fs.cpSync(publicSrc, publicDest, { recursive: true });
-}
-
-require('./.next/standalone/server.js');
+app.prepare().then(() => {
+  createServer((req, res) => {
+    const parsedUrl = parse(req.url, true);
+    handle(req, res, parsedUrl);
+  }).listen(port, '0.0.0.0', () => {
+    console.log('Server running on port ' + port);
+  });
+}).catch((err) => {
+  console.error('Failed to start server:', err);
+  process.exit(1);
+});
