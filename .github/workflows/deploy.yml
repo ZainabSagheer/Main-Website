@@ -73,37 +73,31 @@ jobs:
           path: deploy.tar.gz
           retention-days: 3
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
-
-      - name: Setup SSH password file
-        env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-        run: |
-          printf '%s' "$SSH_PASSWORD" > /tmp/.sshpass
-          chmod 600 /tmp/.sshpass
-
-      - name: Ensure target directory exists
-        run: |
-          sshpass -f /tmp/.sshpass ssh -o StrictHostKeyChecking=no -p 65002 \
-            u293105347@145.79.30.66 \
-            "mkdir -p /home/u293105347/domains/bitsolmarketing.com/public_nodejs"
-
       - name: Upload tarball to Hostinger
-        run: |
-          sshpass -f /tmp/.sshpass scp -o StrictHostKeyChecking=no -P 65002 \
-            deploy.tar.gz \
-            u293105347@145.79.30.66:/home/u293105347/domains/bitsolmarketing.com/
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 145.79.30.66
+          username: u293105347
+          port: 65002
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: deploy.tar.gz
+          target: /home/u293105347/domains/bitsolmarketing.com/
 
       - name: Extract and restart on Hostinger
-        run: |
-          DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
-          TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
-          SSH="sshpass -f /tmp/.sshpass ssh -o StrictHostKeyChecking=no -p 65002 u293105347@145.79.30.66"
-
-          $SSH "rm -rf ${DEPLOY_DIR}_old; mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true; mkdir -p $DEPLOY_DIR"
-          $SSH "tar -xzf $TAR_FILE -C $DEPLOY_DIR && rm -f $TAR_FILE"
-          $SSH "cd $DEPLOY_DIR && npm install --no-save prisma@6 @prisma/client@6 2>/dev/null || true && npx prisma generate 2>/dev/null || true"
-          $SSH "mkdir -p $DEPLOY_DIR/tmp && touch $DEPLOY_DIR/tmp/restart.txt"
-          $SSH "echo 'Deployed at $(date)'"
-          rm -f /tmp/.sshpass
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 145.79.30.66
+          username: u293105347
+          port: 65002
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
+            TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
+            mkdir -p $DEPLOY_DIR
+            rm -rf ${DEPLOY_DIR}_old
+            mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true
+            mkdir -p $DEPLOY_DIR
+            tar -xzf $TAR_FILE -C $DEPLOY_DIR && rm -f $TAR_FILE
+            cd $DEPLOY_DIR && npm install --no-save prisma@6 @prisma/client@6 2>/dev/null || true && npx prisma generate 2>/dev/null || true
+            mkdir -p $DEPLOY_DIR/tmp && touch $DEPLOY_DIR/tmp/restart.txt
+            echo "Deployed at $(date)"
