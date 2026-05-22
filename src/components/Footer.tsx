@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { DIcons } from "dicons";
 import FooterThemeToggle from "@/components/ui/footer-theme-toggle";

@@ -48,9 +48,11 @@ export default function PortfolioPreview() {
               transition={{ delay: i * 0.1 }}
               className="group relative h-[450px] rounded-3xl overflow-hidden border border-white/10"
             >
-              <img 
-                src={project.image} 
-                alt={project.title} 
+              <img
+                src={project.image}
+                alt={project.title}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
