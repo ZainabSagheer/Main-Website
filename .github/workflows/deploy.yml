@@ -42,8 +42,8 @@ jobs:
           cp -r node_modules/.prisma/client/. .next/standalone/node_modules/.prisma/client/
           mkdir -p .next/standalone/node_modules/@prisma/client
           cp -r node_modules/@prisma/client/. .next/standalone/node_modules/@prisma/client/
-          # Phusion Passenger requires app.js as entry point
-          echo "require('./server.js');" > .next/standalone/app.js
+          # Phusion Passenger entry point
+          printf 'process.env.PORT = process.env.PORT || 3000;\nrequire("./server.js");\n' > .next/standalone/app.js
 
       # Pass secrets as env vars — never inline-substitute multiline secrets into shell scripts.
       - name: Write .env to standalone
