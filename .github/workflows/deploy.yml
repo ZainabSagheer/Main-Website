@@ -79,7 +79,7 @@ jobs:
           host: 145.79.30.66
           username: u293105347
           port: 65002
-          password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: deploy.tar.gz
           target: /home/u293105347/domains/bitsolmarketing.com/
 
@@ -89,7 +89,7 @@ jobs:
           host: 145.79.30.66
           username: u293105347
           port: 65002
-          password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             DEPLOY_DIR=/home/u293105347/domains/bitsolmarketing.com/public_nodejs
             TAR_FILE=/home/u293105347/domains/bitsolmarketing.com/deploy.tar.gz
