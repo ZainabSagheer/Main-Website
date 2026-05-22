@@ -4,9 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import dynamic from "next/dynamic";
-
-const Entropy = dynamic(() => import("@/components/ui/entropy").then((m) => m.Entropy), { ssr: false });
+import { Entropy } from "@/components/ClientDynamics";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -86,8 +84,7 @@ export const metadata: Metadata = {
 import { ThemeProvider } from "@/components/theme-provider";
 import Script from "next/script";
 
-const ContactPopup = dynamic(() => import("@/components/ContactPopup").then((m) => m.ContactPopup), { ssr: false });
-const FloatingDock = dynamic(() => import("@/components/FloatingDock").then((m) => m.FloatingDock), { ssr: false });
+import { ContactPopup, FloatingDock } from "@/components/ClientDynamics";
 
 export default function RootLayout({
   children,
