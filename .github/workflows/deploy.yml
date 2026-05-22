@@ -73,14 +73,18 @@ jobs:
           path: deploy.tar.gz
           retention-days: 3
 
-      # Pass SSH key as env var — the heredoc approach breaks with multiline secrets.
       - name: Setup SSH key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          # Handle keys stored with literal \n OR real newlines, strip Windows \r
+          printf '%s' "$SSH_PRIVATE_KEY" | sed 's/\\n/\n/g' | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+          # Validate key is parseable before attempting to use it
+          ssh-keygen -y -f ~/.ssh/deploy_key > ~/.ssh/deploy_key.pub
+          echo "Key fingerprint in use:"
+          ssh-keygen -lf ~/.ssh/deploy_key
           ssh-keyscan -p 65002 145.79.30.66 >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Ensure target directory exists
@@ -105,7 +109,7 @@ jobs:
           $SSH "rm -rf ${DEPLOY_DIR}_old; mv $DEPLOY_DIR ${DEPLOY_DIR}_old 2>/dev/null || true; mkdir -p $DEPLOY_DIR"
           $SSH "tar -xzf $TAR_FILE -C $DEPLOY_DIR && rm -f $TAR_FILE"
 
-          # Regenerate Prisma client for Hostinger's exact OS (belt-and-suspenders)
+          # Regenerate Prisma client for Hostinger's exact OS
           $SSH "cd $DEPLOY_DIR && npm install --no-save prisma@6 @prisma/client@6 2>/dev/null || true && npx prisma generate 2>/dev/null || true"
 
           # Phusion Passenger graceful restart
