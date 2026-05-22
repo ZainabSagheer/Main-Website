@@ -60,7 +60,10 @@
       "Bash(Select-Object Name)",
       "Bash(grep -E \"\\\\.\\(ts|tsx|js\\)$\")",
       "Bash(curl -s https://bitsolmarketing.com/api/blog/health)",
-      "Bash(node scripts/upload-blogs-api.mjs)"
+      "Bash(node scripts/upload-blogs-api.mjs)",
+      "Bash(curl -s https://bitsolmarketing.com/sitemap.xml -o \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\\\\sitemap.xml\")",
+      "Bash(Select-Object Name, FullName)",
+      "Bash(Remove-Item \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\\\\sitemap.xml\")"
     ]
   }
 }
