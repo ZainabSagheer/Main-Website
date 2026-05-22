@@ -9,7 +9,7 @@ config({ path: resolve(__dirname, "../.env") });
 
 const prisma = new PrismaClient();
 
-const blogs = [
+export const blogs = [
   {
     title: "How AI Automation is Transforming Digital Marketing in 2025",
     slug: "ai-automation-transforming-digital-marketing-2025",
@@ -1342,9 +1342,12 @@ async function main() {
   console.log(`\nDone! Created: ${created}, Skipped: ${skipped}`);
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(() => prisma.$disconnect());
+const isMain = process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1]);
+if (isMain) {
+  main()
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    })
+    .finally(() => prisma.$disconnect());
+}

@@ -4,20 +4,19 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   email     String   @unique
   name      String?
   password  String
   role      Role     @default(STUDENT)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  courses   Course[] @relation(fields: [courseIds], references: [id])
-  courseIds String[] @db.ObjectId
+  courses   Course[]
 }
 
 enum Role {
@@ -27,37 +26,36 @@ enum Role {
 }
 
 model Course {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(cuid())
   title       String
-  description String
+  description String   @db.Text
   price       Float
   image       String
-  students    User[]   @relation(fields: [studentIds], references: [id])
-  studentIds  String[] @db.ObjectId
+  students    User[]
   createdAt   DateTime @default(now())
 }
 
 model Blog {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  id              String   @id @default(cuid())
   title           String
-  content         String
+  content         String   @db.LongText
   slug            String   @unique
   author          String
   image           String?
-  excerpt         String?
+  excerpt         String?  @db.Text
   metaDescription String?
-  tags            String[]
+  tags            Json     @default("[]")
   published       Boolean  @default(true)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
 
 model Lead {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   name      String
   email     String
   subject   String
-  message   String
+  message   String   @db.Text
   status    String   @default("NEW")
   createdAt DateTime @default(now())
 }

@@ -13,7 +13,7 @@ envContent.split("\n").forEach((line) => {
 const { PrismaClient } = await import("@prisma/client");
 const prisma = new PrismaClient();
 
-const articles = [
+export const articles = [
   {
     title: "AI Agents in 2025: How Autonomous AI is Replacing Entire Business Workflows",
     slug: "ai-agents-2025-autonomous-business-workflows",
@@ -571,8 +571,10 @@ async function publishAll() {
   await prisma.$disconnect();
 }
 
-publishAll().catch((e) => {
-  console.error(e);
-  prisma.$disconnect();
-  process.exit(1);
-});
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  publishAll().catch((e) => {
+    console.error(e);
+    prisma.$disconnect();
+    process.exit(1);
+  });
+}
