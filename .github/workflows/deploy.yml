@@ -38,12 +38,12 @@ jobs:
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
           cp -r prisma .next/standalone/prisma || true
-          # Copy ALL Prisma engine binaries (all binaryTargets) built during CI
-          # so the tarball works on Hostinger without requiring prisma generate there.
           mkdir -p .next/standalone/node_modules/.prisma/client
           cp -r node_modules/.prisma/client/. .next/standalone/node_modules/.prisma/client/
           mkdir -p .next/standalone/node_modules/@prisma/client
           cp -r node_modules/@prisma/client/. .next/standalone/node_modules/@prisma/client/
+          # Phusion Passenger requires app.js as entry point
+          echo "require('./server.js');" > .next/standalone/app.js
 
       # Pass secrets as env vars — never inline-substitute multiline secrets into shell scripts.
       - name: Write .env to standalone
