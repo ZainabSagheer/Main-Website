@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         destination: "https://bitsolmarketing.com/:path*",
         permanent: true,
       },
+      {
+        source: "/case-studies",
+        destination: "/portfolio",
+        permanent: true,
+      },
     ];
   },
 

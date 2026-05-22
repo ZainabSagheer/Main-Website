@@ -78,7 +78,7 @@ export default async function ServiceDetailPage({
       name: "BITSOL Marketing PVT LTD",
       url: "https://bitsolmarketing.com",
     },
-    areaServed: "Pakistan",
+    areaServed: ["PK", "AE", "US", "Global"],
     url: `https://bitsolmarketing.com/services/${slug}`,
   };
 
