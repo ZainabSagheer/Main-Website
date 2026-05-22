@@ -47,7 +47,7 @@ export default async function Home() {
   }[] = [];
 
   try {
-    blogPosts = await prisma.blog.findMany({
+    const raw = await prisma.blog.findMany({
       where: { published: true },
       orderBy: { createdAt: "desc" },
       take: 3,
@@ -61,6 +61,10 @@ export default async function Home() {
         createdAt: true,
       },
     });
+    blogPosts = raw.map((p) => ({
+      ...p,
+      tags: Array.isArray(p.tags) ? (p.tags as string[]) : [],
+    }));
   } catch {
     // DB unavailable — blog section simply won't render
   }
