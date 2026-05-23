@@ -32,6 +32,14 @@ export async function generateMetadata({
       title: service.metaTitle,
       description: service.metaDescription,
       url: `https://bitsolmarketing.com/services/${slug}`,
+      images: [
+        {
+          url: "https://bitsolmarketing.com/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "BITSOL Marketing — AI Digital Marketing Agency",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",

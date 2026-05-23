@@ -54,7 +54,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "fs-extra": "^11.3.5",
-    "prisma": "^6.19.3"
+    "prisma": "^6.19.3",
+    "puppeteer": "^25.0.4"
   },
   "overrides": {
     "postcss": "^8.5.10"

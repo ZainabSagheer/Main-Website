@@ -35,7 +35,6 @@ const navigation = {
           items: [
             { name: "About Us", href: "/about" },
             { name: "Our Process", href: "/about#process" },
-            { name: "Careers", href: "/careers" },
             { name: "Blog", href: "/blog" },
           ],
         },

@@ -11,6 +11,14 @@ export const metadata: Metadata = {
     description:
       "Master digital marketing, AI automation, and trading with BITSOL Academy's expert-led online courses.",
     url: "https://bitsolmarketing.com/courses",
+    images: [
+      {
+        url: "https://bitsolmarketing.com/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "BITSOL Marketing — AI Digital Marketing Agency",
+      },
+    ],
   },
 };
 

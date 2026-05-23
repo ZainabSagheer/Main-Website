@@ -10,7 +10,7 @@ import { CheckCircle2 } from "lucide-react";
 import Script from "next/script";
 import { prisma } from "@/lib/prisma";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 const homepageFAQ = [
   {
@@ -233,12 +233,16 @@ export default async function Home() {
             Join the elite group of companies transforming their industries with BITSOL's cutting-edge technologies.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-             <Button variant="brand" size="lg" className="rounded-full px-12 py-8 text-xl font-bold">
-                Start Your Journey
-             </Button>
-             <Button variant="outline" size="lg" className="border-brand-purple text-slate-900 dark:text-brand-white hover:bg-brand-purple/10 rounded-full px-12 py-8 text-xl font-bold">
-                Book a Demo
-             </Button>
+             <Link href="/contact">
+               <Button variant="brand" size="lg" className="rounded-full px-12 py-8 text-xl font-bold">
+                  Start Your Journey
+               </Button>
+             </Link>
+             <Link href="/contact">
+               <Button variant="outline" size="lg" className="border-brand-purple text-slate-900 dark:text-brand-white hover:bg-brand-purple/10 rounded-full px-12 py-8 text-xl font-bold">
+                  Book a Demo
+               </Button>
+             </Link>
           </div>
         </div>
       </section>

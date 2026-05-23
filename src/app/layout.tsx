@@ -97,6 +97,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://prod.spline.design" />
+        <link rel="dns-prefetch" href="https://prod.spline.design" />
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -115,32 +117,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": ["Organization", "ProfessionalService"],
+              "@id": "https://bitsolmarketing.com/#organization",
               "name": "BITSOL Marketing PVT LTD",
               "alternateName": "BITSOL Marketing",
               "url": "https://bitsolmarketing.com",
               "logo": {
                 "@type": "ImageObject",
+                "@id": "https://bitsolmarketing.com/#logo",
                 "url": "https://bitsolmarketing.com/logo.png",
                 "width": 200,
-                "height": 60
+                "height": 60,
+                "caption": "BITSOL Marketing"
               },
+              "image": "https://bitsolmarketing.com/logo.png",
               "description": "Pakistan's premier AI digital marketing agency offering SEO, Meta Ads, AI automation, web development, mobile apps, and algorithmic trading technology.",
-              "foundingDate": "2023",
+              "foundingDate": "2020",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "83/3 C KB Commercial, Phase 1, DHA",
+                "addressLocality": "Lahore",
+                "addressRegion": "Punjab",
+                "addressCountry": "PK"
+              },
               "areaServed": [
                 { "@type": "Country", "name": "Pakistan" },
-                { "@type": "City", "name": "Karachi" },
-                { "@type": "City", "name": "Lahore" },
-                { "@type": "City", "name": "Islamabad" }
-              ],
-              "serviceType": [
-                "AI Digital Marketing",
-                "SEO Services",
-                "Meta Ads Management",
-                "Google Ads Management",
-                "AI Automation",
-                "Web Development",
-                "Mobile App Development",
-                "Algorithmic Trading Software"
+                { "@type": "Country", "name": "United Arab Emirates" },
+                { "@type": "Country", "name": "United Kingdom" },
+                { "@type": "Country", "name": "United States" }
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
@@ -156,7 +159,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+92-310-317-5175",
+                "telephone": "+923103175175",
                 "contactType": "customer service",
                 "areaServed": ["PK", "AE", "GB", "US"],
                 "availableLanguage": ["English", "Urdu"]
