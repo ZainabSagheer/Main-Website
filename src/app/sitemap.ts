@@ -6,6 +6,14 @@ import { prisma } from '@/lib/prisma';
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  try {
+    return await buildSitemap();
+  } catch {
+    return [{ url: 'https://bitsolmarketing.com', lastModified: new Date(), priority: 1.0 }];
+  }
+}
+
+async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://bitsolmarketing.com';
 
   const staticPages = [

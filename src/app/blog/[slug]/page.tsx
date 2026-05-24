@@ -6,6 +6,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import type { Metadata } from "next";
 import Image from "next/image";
+import Script from "next/script";
 
 export const dynamic = "force-dynamic";
 
@@ -83,9 +84,9 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.metaDescription || post.excerpt || post.title,
     author: {
-      "@type": "Organization",
-      name: post.author?.name || post.author || "BITSOL Team",
-      url: "https://bitsolmarketing.com",
+      "@type": "Person",
+      name: post.author?.name || post.author || "Muhammad Adnan Bashir",
+      url: "https://bitsolmarketing.com/about",
     },
     publisher: {
       "@type": "Organization",
@@ -106,7 +107,8 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <script
+      <Script
+        id="article-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />

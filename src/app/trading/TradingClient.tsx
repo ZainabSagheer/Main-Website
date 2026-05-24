@@ -90,13 +90,17 @@ export default function TradingClient() {
                 ))}
               </div>
               <div className="mt-4 flex justify-between text-xs text-brand-cyan font-mono">
-                <span>LIVE MARKET DATA</span>
-                <span>PSX: +2.4%</span>
-                <span>BTC: $64,231</span>
+                <span>ILLUSTRATIVE DATA</span>
+                <span>PSX ALGO</span>
+                <span>CRYPTO BOT</span>
               </div>
             </div>
           </motion.div>
         </div>
+
+        <p className="text-xs text-slate-400 dark:text-brand-muted/60 mb-16 border border-slate-200 dark:border-white/5 rounded-xl px-6 py-4 max-w-3xl">
+          <strong>Risk Disclaimer:</strong> Algorithmic trading involves significant financial risk. Past performance of any system or strategy is not indicative of future results. All trading technology provided by BITSOL Marketing is for informational and automation purposes only and does not constitute financial advice. Capital invested in financial markets may be lost in part or in full.
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {tradingServices.map((service, i) => (

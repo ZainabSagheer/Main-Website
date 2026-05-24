@@ -180,15 +180,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "BITSOL Marketing",
-              "url": "https://bitsolmarketing.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": {
-                  "@type": "EntryPoint",
-                  "urlTemplate": "https://bitsolmarketing.com/blog?q={search_term_string}"
-                },
-                "query-input": "required name=search_term_string"
-              }
+              "url": "https://bitsolmarketing.com"
             }),
           }}
         />

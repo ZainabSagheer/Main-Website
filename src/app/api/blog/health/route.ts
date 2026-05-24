@@ -10,6 +10,6 @@ export async function GET() {
     return NextResponse.json({ ok: true, total, published });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
-    return NextResponse.json({ ok: false, error: message }, { status: 500 });
+    return NextResponse.json({ ok: false, error: message }, { status: 503 });
   }
 }

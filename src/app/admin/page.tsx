@@ -66,7 +66,10 @@ export default function AdminDashboard() {
           ))}
         </nav>
 
-        <button className="flex items-center gap-4 px-4 py-3 rounded-xl text-brand-muted hover:bg-destructive/10 hover:text-destructive transition-all mt-auto">
+        <button
+          className="flex items-center gap-4 px-4 py-3 rounded-xl text-brand-muted hover:bg-destructive/10 hover:text-destructive transition-all mt-auto"
+          onClick={() => fetch("/api/admin/login", { method: "DELETE" }).then(() => (window.location.href = "/admin/login"))}
+        >
           <LogOut className="w-5 h-5" />
           <span className="font-medium">Logout</span>
         </button>
