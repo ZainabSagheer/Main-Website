@@ -1,11 +1,11 @@
-name: Deploy to Hostinger
+name: Build
 
 on:
   push:
     branches: [main]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,9 +31,8 @@ jobs:
           BLOG_API_KEY: ${{ secrets.BLOG_API_KEY }}
           NEXT_PUBLIC_APP_URL: https://bitsolmarketing.com
 
-      - name: Prepare standalone deployment
+      - name: Prepare standalone output
         run: |
-          # Ensure the nested .next dir exists inside standalone before copying
           mkdir -p .next/standalone/.next/static
           cp -r .next/static/. .next/standalone/.next/static/
           cp -r public .next/standalone/public
@@ -42,15 +41,4 @@ jobs:
           cp -r node_modules/.prisma/client/. .next/standalone/node_modules/.prisma/client/
           mkdir -p .next/standalone/node_modules/@prisma/client
           cp -r node_modules/@prisma/client/. .next/standalone/node_modules/@prisma/client/
-          # Phusion Passenger entry point
           printf 'process.env.PORT = process.env.PORT || 3000;\nrequire("./server.js");\n' > .next/standalone/app.js
-
-      - name: Deploy to Hostinger via SSH
-        uses: easingthemes/ssh-deploy@main
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-avz --delete"
-          SOURCE: ".next/standalone/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
