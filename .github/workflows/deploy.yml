@@ -54,3 +54,17 @@ jobs:
           REMOTE_PORT: 22
           TARGET: ${{ secrets.REMOTE_TARGET }}
           SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
+
+      - name: Restart Node.js app on Hostinger
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd ${{ secrets.REMOTE_TARGET }}
+            # Try PM2 (VPS setup)
+            pm2 restart all 2>/dev/null || true
+            # Passenger restart (shared/business hosting)
+            mkdir -p tmp && touch tmp/restart.txt
