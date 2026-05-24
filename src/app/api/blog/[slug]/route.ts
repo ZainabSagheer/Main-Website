@@ -19,6 +19,27 @@ export async function GET(
   }
 }
 
+export async function PATCH(
+  req: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const apiKey = req.headers.get("x-api-key");
+    if (!apiKey || apiKey !== process.env.BLOG_API_KEY) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const { slug } = await params;
+    const body = await req.json();
+    const updated = await prisma.blog.update({
+      where: { slug },
+      data: body,
+    });
+    return NextResponse.json(updated);
+  } catch {
+    return NextResponse.json({ error: "Failed to update post" }, { status: 500 });
+  }
+}
+
 export async function DELETE(
   req: Request,
   { params }: { params: Promise<{ slug: string }> }
