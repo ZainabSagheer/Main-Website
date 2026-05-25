@@ -15,23 +15,27 @@ export const revalidate = 60;
 const homepageFAQ = [
   {
     question: "What digital marketing services does BITSOL Marketing offer in Pakistan?",
-    answer: "BITSOL Marketing is a full-service AI digital marketing agency in Pakistan offering SEO, Meta Ads (Facebook & Instagram), Google Ads, AI automation, WhatsApp chatbot development, social media management, web development, mobile app development, and algorithmic trading technology. We serve businesses in Karachi, Lahore, Islamabad, and globally.",
+    answer: "BITSOL Marketing offers a complete range of digital marketing services in Pakistan: SEO, social media marketing, Google Ads, Meta Ads (Facebook & Instagram), web development, content marketing, Google Business Profile optimization, and branding. We serve businesses in Karachi, Lahore, Islamabad, and internationally.",
   },
   {
-    question: "How is BITSOL Marketing different from other digital marketing agencies in Pakistan?",
-    answer: "BITSOL Marketing is Pakistan's only AI-native digital marketing agency. We build and deploy custom AI systems — LLM agents, predictive analytics, Sentinel SEO — to give our clients a measurable competitive advantage. Most agencies use generic tools; we build custom AI for your specific business.",
+    question: "How do SEO services from BITSOL Marketing help my business rank on Google?",
+    answer: "We run a full SEO process — technical audit, keyword research, on-page optimisation, content production, and link building. We also optimise your Google Business Profile so your business ranks in the Google Map Pack for local searches. Most clients see first-page rankings for local keywords within 60–90 days.",
   },
   {
-    question: "Does BITSOL Marketing offer SEO services in Karachi, Lahore, and Islamabad?",
-    answer: "Yes. We offer local SEO, national SEO, and international SEO for businesses across Pakistan. Our AI-powered keyword intelligence and technical SEO expertise consistently ranks clients in the top 3 positions for their target keywords in all major Pakistani cities.",
+    question: "Does BITSOL Marketing manage Google Ads and Meta Ads campaigns?",
+    answer: "Yes. Paid media management is a core BITSOL service. We manage Google Search, Display, Shopping, and Performance Max campaigns alongside Meta Ads (Facebook + Instagram) for Pakistani businesses. We handle creative, audience targeting, bidding, and daily optimisation — with transparent weekly reporting.",
   },
   {
-    question: "Can BITSOL Marketing manage our Facebook and Google Ads campaigns?",
-    answer: "Yes. Paid media management is a core service. Our team manages Meta Ads (Facebook + Instagram) and Google Ads for Pakistani businesses across all budgets — from PKR 50,000 to PKR 2M+ per month. We handle creative, targeting, bidding, and daily optimisation.",
+    question: "Can BITSOL Marketing build a professional website for my business?",
+    answer: "Yes. Our web development team builds fast, mobile-responsive, SEO-optimised websites and web applications on Next.js, React, and WordPress. Every site includes proper schema markup, Core Web Vitals compliance, and conversion-optimised design. We serve businesses in Karachi, Lahore, Islamabad, and the UAE.",
   },
   {
-    question: "How do I get started with BITSOL Marketing?",
-    answer: "Book a free strategy call through our Contact page or WhatsApp. We'll review your current digital presence, identify the biggest growth opportunities, and propose a custom plan — no obligation.",
+    question: "What is Google Business Profile optimization and why does it matter?",
+    answer: "Google Business Profile (GBP) optimization means setting up and fully completing your free Google listing so your business appears in Google Maps and the Local Pack when people search for your services nearby. BITSOL's local SEO team optimises your GBP profile, manages reviews, publishes regular posts, and builds local citations to maximise your visibility in local search.",
+  },
+  {
+    question: "How do I get a free consultation from BITSOL Marketing?",
+    answer: "Click the 'Get Free Consultation' button on this page or visit our Contact page. You can book a call directly or message us on WhatsApp. We'll review your current digital presence, identify the highest-ROI opportunities, and propose a tailored growth plan — with no obligation.",
   },
 ];
 
@@ -139,41 +143,47 @@ export default async function Home() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
-              Pakistan&apos;s Leading <span className="text-gradient">AI Digital Marketing Agency</span>
+              Pakistan&apos;s Result-Driven <span className="text-gradient">Digital Marketing Agency</span>
             </h2>
             <p className="text-lg text-black dark:text-brand-muted max-w-3xl mx-auto">
-              BITSOL Marketing is a full-service AI digital marketing agency headquartered in Pakistan, serving ambitious businesses in Karachi, Lahore, Islamabad, and globally. We combine artificial intelligence with proven marketing fundamentals to deliver growth that compounds.
+              BITSOL Marketing is a full-service digital marketing agency headquartered in Pakistan, helping businesses in Karachi, Lahore, Islamabad, and globally rank higher, generate qualified leads, and grow revenue through SEO, paid ads, social media, and professional web solutions.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {[
               {
-                title: "AI-Powered SEO",
-                body: "Our Sentinel SEO engine uses machine learning to identify keyword opportunities and semantic gaps your competitors miss. We rank Pakistani businesses on page one of Google — sustainably.",
+                title: "SEO & Google Business Profile",
+                body: "We deliver technical SEO, local SEO, and Google Business Profile optimization that ranks your business on page one of Google and in the Google Map Pack for searches in your city.",
+                href: "/services/seo-optimization",
               },
               {
-                title: "Meta & Google Ads Management",
-                body: "We manage Facebook, Instagram, and Google ad campaigns for businesses across Pakistan. Every rupee is tracked, attributed, and optimised for maximum return on ad spend.",
+                title: "Meta Ads & Google Ads",
+                body: "We manage Facebook, Instagram, and Google Ads campaigns for businesses across Pakistan — creative, targeting, bidding, and daily optimisation for maximum ROAS.",
+                href: "/services/digital-marketing",
               },
               {
-                title: "AI Automation & Chatbots",
-                body: "We build custom AI agents, WhatsApp bots, and workflow automation systems that save businesses 40+ hours per week and respond to customers 24/7 without additional staff.",
+                title: "Social Media & Content Marketing",
+                body: "We build social media presence and content strategies that attract your target audience, build brand authority, and convert followers into paying customers.",
+                href: "/services/content-marketing",
               },
               {
-                title: "Web & App Development",
-                body: "From Next.js websites to Flutter mobile apps, we build fast, SEO-ready digital products for Pakistani businesses that need to compete online and win.",
+                title: "Web Development & Branding",
+                body: "From fast, SEO-optimised websites on Next.js to complete brand identity systems, we build the digital foundation your business needs to compete and grow online.",
+                href: "/services/web-development",
               },
             ].map((item, i) => (
-              <GlowingCard key={i}>
-                <div className="p-8 flex items-start gap-4">
-                  <CheckCircle2 className="w-6 h-6 text-brand-cyan shrink-0 mt-1" />
-                  <div>
-                    <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">{item.title}</h3>
-                    <p className="text-slate-600 dark:text-brand-muted leading-relaxed">{item.body}</p>
+              <Link key={i} href={item.href}>
+                <GlowingCard>
+                  <div className="p-8 flex items-start gap-4">
+                    <CheckCircle2 className="w-6 h-6 text-brand-cyan shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">{item.title}</h3>
+                      <p className="text-slate-600 dark:text-brand-muted leading-relaxed">{item.body}</p>
+                    </div>
                   </div>
-                </div>
-              </GlowingCard>
+                </GlowingCard>
+              </Link>
             ))}
           </div>
 
@@ -226,21 +236,21 @@ export default async function Home() {
       {/* Final CTA Section */}
       <section className="py-24 bg-transparent text-center border-t border-slate-200 dark:border-white/5">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl md:text-7xl font-bold mb-10 text-slate-900 dark:text-white">
-            Ready to <span className="text-gradient">Accelerate</span>?
+          <h2 className="text-4xl md:text-6xl font-bold mb-10 text-slate-900 dark:text-white">
+            Ready to <span className="text-gradient">Grow Your Business</span>?
           </h2>
           <p className="text-black dark:text-brand-muted text-xl max-w-2xl mx-auto mb-12">
-            Join the elite group of companies transforming their industries with BITSOL's cutting-edge technologies.
+            Get a free consultation and discover which digital marketing services will generate the most growth for your business.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6">
              <Link href="/contact">
                <Button variant="brand" size="lg" className="rounded-full px-12 py-8 text-xl font-bold">
-                  Start Your Journey
+                  Get Free Consultation
                </Button>
              </Link>
-             <Link href="/contact">
+             <Link href="/pricing">
                <Button variant="outline" size="lg" className="border-brand-purple text-slate-900 dark:text-brand-white hover:bg-brand-purple/10 rounded-full px-12 py-8 text-xl font-bold">
-                  Book a Demo
+                  View Packages
                </Button>
              </Link>
           </div>

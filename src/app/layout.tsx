@@ -16,22 +16,24 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://bitsolmarketing.com"),
   title: {
-    default: "BITSOL Marketing | AI Digital Marketing Agency Pakistan",
+    default: "BITSOL Marketing | Digital Marketing Agency in Pakistan",
     template: "%s | BITSOL Marketing",
   },
   description:
-    "BITSOL Marketing is a full-service AI digital marketing agency in Pakistan. We deliver AI SEO, chatbot development, Meta ads, automation, and growth marketing globally.",
+    "BITSOL Marketing is a results-driven digital marketing agency in Pakistan. We offer SEO, social media marketing, Meta Ads, Google Ads, web development, content marketing, and Google Business Profile optimization.",
   keywords: [
-    "AI digital marketing agency",
-    "AI marketing agency Pakistan",
-    "AI SEO services",
-    "AI chatbot development",
     "digital marketing agency Pakistan",
-    "WhatsApp AI automation",
-    "Meta ads agency",
-    "growth marketing agency",
-    "web development Pakistan",
+    "SEO services Pakistan",
+    "social media marketing Pakistan",
+    "Google Ads agency Pakistan",
+    "Meta Ads agency Pakistan",
+    "web development company Pakistan",
+    "content marketing agency",
+    "Google Business Profile optimization",
+    "digital marketing agency Lahore",
+    "digital marketing agency Karachi",
     "BITSOL Marketing",
+    "branding agency Pakistan",
   ],
   authors: [{ name: "BITSOL Marketing Team" }],
   creator: "BITSOL Marketing PVT LTD",
@@ -49,23 +51,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://bitsolmarketing.com",
     siteName: "BITSOL Marketing",
-    title: "BITSOL Marketing | AI Digital Marketing Agency Pakistan",
+    title: "BITSOL Marketing | Digital Marketing Agency in Pakistan",
     description:
-      "Full-service AI digital marketing agency offering SEO, chatbot development, Meta ads, automation and growth marketing for businesses in Pakistan and globally.",
+      "Grow your business with BITSOL Marketing — result-driven SEO, social media marketing, Google Ads, Meta Ads, web development, and content marketing for brands in Pakistan and globally.",
     images: [
       {
         url: "https://bitsolmarketing.com/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "BITSOL Marketing — AI Digital Marketing Agency",
+        alt: "BITSOL Marketing — Digital Marketing Agency Pakistan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BITSOL Marketing | AI Digital Marketing Agency",
+    title: "BITSOL Marketing | Digital Marketing Agency Pakistan",
     description:
-      "AI SEO, chatbot development, Meta ads & automation for businesses in Pakistan and worldwide.",
+      "Result-driven SEO, social media marketing, Google Ads, Meta Ads & web development for brands in Pakistan and worldwide.",
     images: ["https://bitsolmarketing.com/opengraph-image"],
   },
   other: {
@@ -116,71 +118,125 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": ["Organization", "ProfessionalService"],
-              "@id": "https://bitsolmarketing.com/#organization",
-              "name": "BITSOL Marketing PVT LTD",
-              "alternateName": "BITSOL Marketing",
-              "url": "https://bitsolmarketing.com",
-              "logo": {
-                "@type": "ImageObject",
-                "@id": "https://bitsolmarketing.com/#logo",
-                "url": "https://bitsolmarketing.com/logo.png",
-                "width": 200,
-                "height": 60,
-                "caption": "BITSOL Marketing"
-              },
-              "image": "https://bitsolmarketing.com/logo.png",
-              "description": "Pakistan's premier AI digital marketing agency offering SEO, Meta Ads, AI automation, web development, mobile apps, and algorithmic trading technology.",
-              "foundingDate": "2020",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "83/3 C KB Commercial, Phase 1, DHA",
-                "addressLocality": "Lahore",
-                "addressRegion": "Punjab",
-                "addressCountry": "PK"
-              },
-              "areaServed": [
-                { "@type": "Country", "name": "Pakistan" },
-                { "@type": "Country", "name": "United Arab Emirates" },
-                { "@type": "Country", "name": "United Kingdom" },
-                { "@type": "Country", "name": "United States" }
-              ],
-              "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "BITSOL Marketing Services",
-                "itemListElement": [
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Optimization" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile Apps" } },
-                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trading Tech" } }
-                ]
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+923103175175",
-                "contactType": "customer service",
-                "areaServed": ["PK", "AE", "GB", "US"],
-                "availableLanguage": ["English", "Urdu"]
-              },
-              "sameAs": [
-                "https://www.facebook.com/bitsolmarketing/",
-                "https://www.linkedin.com/company/bitsolpvtltd/",
-                "https://www.instagram.com/bitsolmarketing"
+              "@graph": [
+                {
+                  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+                  "@id": "https://bitsolmarketing.com/#organization",
+                  "name": "BITSOL Marketing PVT LTD",
+                  "alternateName": "BITSOL Marketing",
+                  "url": "https://bitsolmarketing.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "@id": "https://bitsolmarketing.com/#logo",
+                    "url": "https://bitsolmarketing.com/logo.png",
+                    "width": 200,
+                    "height": 60,
+                    "caption": "BITSOL Marketing"
+                  },
+                  "image": "https://bitsolmarketing.com/opengraph-image",
+                  "description": "BITSOL Marketing is a results-driven digital marketing agency in Pakistan. We offer SEO, social media marketing, Meta Ads, Google Ads, web development, content marketing, and Google Business Profile optimization.",
+                  "foundingDate": "2020",
+                  "priceRange": "$$",
+                  "telephone": "+923103175175",
+                  "email": "info@bitsolmarketing.com",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "83/3 C KB Commercial, Phase 1, DHA",
+                    "addressLocality": "Lahore",
+                    "addressRegion": "Punjab",
+                    "postalCode": "54792",
+                    "addressCountry": "PK"
+                  },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "31.4697",
+                    "longitude": "74.4158"
+                  },
+                  "openingHoursSpecification": [
+                    {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+                      "opens": "09:00",
+                      "closes": "18:00"
+                    }
+                  ],
+                  "areaServed": [
+                    { "@type": "Country", "name": "Pakistan" },
+                    { "@type": "Country", "name": "United Arab Emirates" },
+                    { "@type": "Country", "name": "United Kingdom" },
+                    { "@type": "Country", "name": "United States" }
+                  ],
+                  "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Digital Marketing Services",
+                    "itemListElement": [
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Services", "url": "https://bitsolmarketing.com/services/seo-optimization" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing", "url": "https://bitsolmarketing.com/services/digital-marketing" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads Management", "url": "https://bitsolmarketing.com/services/digital-marketing" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads Management", "url": "https://bitsolmarketing.com/services/digital-marketing" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "url": "https://bitsolmarketing.com/services/web-development" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Marketing", "url": "https://bitsolmarketing.com/services/digital-marketing" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Business Profile Optimization", "url": "https://bitsolmarketing.com/services/seo-optimization" } },
+                      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding", "url": "https://bitsolmarketing.com/services/digital-marketing" } }
+                    ]
+                  },
+                  "contactPoint": [
+                    {
+                      "@type": "ContactPoint",
+                      "telephone": "+923103175175",
+                      "contactType": "customer service",
+                      "areaServed": ["PK", "AE", "GB", "US"],
+                      "availableLanguage": ["English", "Urdu"]
+                    },
+                    {
+                      "@type": "ContactPoint",
+                      "contactType": "sales",
+                      "email": "info@bitsolmarketing.com",
+                      "availableLanguage": ["English", "Urdu"]
+                    }
+                  ],
+                  "sameAs": [
+                    "https://www.facebook.com/bitsolmarketing/",
+                    "https://www.linkedin.com/company/bitsolpvtltd/",
+                    "https://www.instagram.com/bitsolmarketing"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://bitsolmarketing.com/#website",
+                  "url": "https://bitsolmarketing.com",
+                  "name": "BITSOL Marketing",
+                  "description": "Result-driven digital marketing agency in Pakistan — SEO, social media, Google Ads, Meta Ads, and web development.",
+                  "publisher": { "@id": "https://bitsolmarketing.com/#organization" },
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": {
+                      "@type": "EntryPoint",
+                      "urlTemplate": "https://bitsolmarketing.com/blog?q={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                  }
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": "https://bitsolmarketing.com/#webpage",
+                  "url": "https://bitsolmarketing.com",
+                  "name": "BITSOL Marketing | Digital Marketing Agency in Pakistan",
+                  "isPartOf": { "@id": "https://bitsolmarketing.com/#website" },
+                  "about": { "@id": "https://bitsolmarketing.com/#organization" },
+                  "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                      {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://bitsolmarketing.com"
+                      }
+                    ]
+                  }
+                }
               ]
-            }),
-          }}
-        />
-        <Script
-          id="json-ld-website"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "BITSOL Marketing",
-              "url": "https://bitsolmarketing.com"
             }),
           }}
         />

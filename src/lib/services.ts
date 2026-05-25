@@ -5,6 +5,8 @@ import {
   Smartphone,
   Search,
   TrendingUp,
+  PenTool,
+  Palette,
 } from "lucide-react";
 
 export interface ServiceFAQ {
@@ -247,51 +249,51 @@ export const services: Service[] = [
   },
   {
     slug: "seo-optimization",
-    title: "SEO Optimization",
-    desc: "AI-powered search engine optimization to keep you at the top of every query.",
+    title: "SEO Services",
+    desc: "Result-driven SEO and Google Business Profile optimization to rank higher and get found locally.",
     fullDesc:
-      "BITSOL Marketing delivers AI-powered SEO services that drive sustainable organic growth for businesses in Pakistan and beyond. Search is the highest-intent marketing channel — people searching for your service are already ready to buy. Our SEO team combines technical excellence, topic cluster content strategy, and authority link building to push your pages to page one of Google. We specialise in local SEO for Karachi, Lahore, and Islamabad businesses, as well as national and international SEO for brands targeting global audiences. Our proprietary AI keyword intelligence tool, Sentinel SEO, analyses search intent patterns and semantic relationships that manual tools miss — giving our clients a consistent ranking advantage over competitors still relying on outdated SEO tactics.",
-    metaTitle: "SEO Agency Pakistan | AI SEO Services for Karachi, Lahore & Islamabad",
+      "BITSOL Marketing delivers comprehensive SEO services that drive sustainable organic growth for businesses in Pakistan and beyond. Our SEO team combines technical excellence, topic cluster content strategy, and authority link building to push your pages to page one of Google. We specialise in local SEO for Karachi, Lahore, and Islamabad businesses — including full Google Business Profile (GBP) optimisation to dominate the Google Map Pack for local searches. From technical audits and on-page optimisation to link building and AI Overview optimisation, we run every element of the SEO process. Our clients consistently see first-page rankings within 60–90 days for local keywords and 3–6 months for competitive national terms.",
+    metaTitle: "SEO Services Pakistan | SEO Agency for Karachi, Lahore & Islamabad",
     metaDescription:
-      "Pakistan's leading AI SEO agency. Technical SEO, content strategy, local SEO for Karachi, Lahore & Islamabad, and link building that ranks. Free SEO audit. BITSOL Marketing.",
+      "Top SEO agency in Pakistan. Technical SEO, local SEO, Google Business Profile optimization, content strategy, and link building. Free SEO audit. BITSOL Marketing.",
     icon: Search,
     iconBg: "#00D9FF1A",
     iconColor: "#00D9FF",
     features: [
+      "Google Business Profile Optimization",
+      "Technical SEO & Core Web Vitals",
+      "Local SEO for Pakistani Cities",
       "AI-Powered Keyword Intelligence",
-      "Semantic Content Engineering",
-      "Technical Authority Building",
-      "Generative Search Optimization",
     ],
     benefits: [
       "Rank on page one for your highest-value keywords and capture buyers at the moment of intent.",
+      "Appear in Google Maps and Local Pack for searches in Karachi, Lahore, and Islamabad.",
       "Build a compounding organic traffic channel that reduces dependency on paid ads over time.",
-      "Dominate local search in Karachi, Lahore, and Islamabad with targeted local SEO strategies.",
-      "Future-proof your visibility in AI-generated search results (ChatGPT, Gemini, Perplexity) with entity-based SEO.",
+      "Future-proof your visibility in AI-generated search results (Google AI Overviews, ChatGPT, Perplexity).",
     ],
     processSteps: [
       { step: "Technical Audit", detail: "Full site crawl — indexation, Core Web Vitals, schema, canonicals, internal linking, and mobile performance." },
       { step: "Keyword Strategy", detail: "Topic cluster mapping with search volume, intent classification, and competitive difficulty scoring." },
       { step: "On-Page Optimisation", detail: "Title tags, meta descriptions, H1/H2 structure, schema markup, and content depth improvements." },
-      { step: "Content Production", detail: "SEO-optimised blog posts, service pages, and FAQs that target your keyword clusters." },
+      { step: "GBP & Local SEO", detail: "Google Business Profile setup, optimisation, review strategy, and local citation building." },
       { step: "Link Building", detail: "White-hat backlink acquisition through digital PR, directory citations, and strategic outreach." },
     ],
     faq: [
       {
         question: "How long does SEO take to show results in Pakistan?",
-        answer: "You can expect to see measurable ranking improvements in 60–90 days for low-competition keywords and 4–6 months for competitive terms. Organic traffic compounds over time — the longer you invest, the higher the returns.",
+        answer: "Measurable ranking improvements typically appear in 60–90 days for local and low-competition keywords and 4–6 months for competitive terms. Organic traffic compounds over time — the longer you invest, the higher the returns.",
       },
       {
         question: "How much do SEO services cost in Pakistan?",
         answer: "Basic local SEO starts from PKR 25,000/month. Comprehensive national SEO ranges from PKR 50,000–150,000/month. Enterprise and e-commerce SEO starts from PKR 150,000/month. All plans include monthly reporting.",
       },
       {
-        question: "Do you offer local SEO for businesses in Karachi, Lahore and Islamabad?",
-        answer: "Yes. Local SEO is one of our strongest services. We optimise your Google Business Profile, build local citations, create city-specific landing pages, and build links from Pakistan-relevant domains to dominate local search results.",
+        question: "Do you offer Google Business Profile optimization?",
+        answer: "Yes. Google Business Profile (GBP) optimisation is a core part of our local SEO service. We set up and fully optimise your GBP listing, manage reviews, add posts, and build citations to rank your business in the Google Map Pack.",
       },
       {
-        question: "What makes BITSOL's SEO different from other agencies in Pakistan?",
-        answer: "We use proprietary AI keyword intelligence (Sentinel SEO) to identify search opportunities competitors miss. We also optimise for AI-generated search results (AEO/GEO) — a critical emerging channel most Pakistani agencies are ignoring.",
+        question: "Do you offer local SEO for businesses in Karachi, Lahore and Islamabad?",
+        answer: "Yes. Local SEO is one of our strongest services. We optimise your Google Business Profile, build local citations, create city-specific landing pages, and build links from Pakistan-relevant domains to dominate local search results.",
       },
       {
         question: "Can you recover a website from a Google penalty?",
@@ -350,6 +352,114 @@ export const services: Service[] = [
       {
         question: "Can I run a trading bot without programming knowledge?",
         answer: "Yes. We build trading systems with visual dashboards and simple controls. You can monitor positions, pause strategies, and adjust risk parameters without writing a single line of code.",
+      },
+    ],
+  },
+  {
+    slug: "content-marketing",
+    title: "Content Marketing",
+    desc: "Strategic content that attracts, engages, and converts your ideal audience at every stage.",
+    fullDesc:
+      "BITSOL Marketing builds content marketing systems for businesses in Pakistan that generate qualified leads and establish authority — not just blog posts that nobody reads. Our content team creates SEO-optimised articles, case studies, email sequences, video scripts, social media content, and lead magnets that move prospects through your sales funnel. Every piece of content we produce is mapped to a specific keyword, a specific buyer persona, and a specific stage of the customer journey. We measure content performance by organic traffic, leads generated, and revenue attributed — not page views. Whether you need a 12-month editorial calendar, a weekly blog service, or a complete inbound marketing system, we build content that compounds in value over time.",
+    metaTitle: "Content Marketing Agency Pakistan | Blog, SEO Content & Lead Generation",
+    metaDescription:
+      "Strategic content marketing for businesses in Pakistan. SEO blog content, email sequences, social media copy, and lead magnets that generate qualified leads. BITSOL Marketing.",
+    icon: PenTool,
+    iconBg: "#00D9FF1A",
+    iconColor: "#00D9FF",
+    features: [
+      "SEO-Optimised Blog & Article Writing",
+      "Email Marketing Sequences",
+      "Social Media Content Production",
+      "Lead Magnet & Landing Page Copy",
+    ],
+    benefits: [
+      "Attract qualified prospects to your website through content that ranks on Google.",
+      "Build authority in your industry so buyers trust you before they've even spoken to your team.",
+      "Generate leads 24/7 through evergreen content that keeps producing results long after it's published.",
+      "Reduce paid ad dependency as organic content compounds into a self-sustaining traffic channel.",
+    ],
+    processSteps: [
+      { step: "Content Audit", detail: "We audit your existing content, identify gaps, and map your buyer's journey." },
+      { step: "Strategy & Calendar", detail: "We build a 90-day content calendar with keyword targets, formats, and distribution channels." },
+      { step: "Production", detail: "Our writers produce SEO-optimised content reviewed by subject matter experts before publishing." },
+      { step: "Distribution", detail: "We publish, distribute via email and social, and promote content to build backlinks and reach." },
+      { step: "Measure & Optimise", detail: "Monthly reporting on organic traffic, leads generated, and top-performing content. We update underperforming articles." },
+    ],
+    faq: [
+      {
+        question: "How much does content marketing cost in Pakistan?",
+        answer: "Content marketing packages start from PKR 30,000/month for 4 SEO-optimised articles. Full-service inbound marketing (content + email + social + distribution) starts from PKR 80,000/month.",
+      },
+      {
+        question: "How long before content marketing generates results?",
+        answer: "SEO content typically starts ranking within 2–4 months of publishing. The compounding effect — where each article adds to your organic traffic base — becomes significant at the 6–12 month mark.",
+      },
+      {
+        question: "Do you write content in English and Urdu?",
+        answer: "Yes. We produce content in both English and Urdu depending on your target audience. English content targets international and urban Pakistani audiences; Urdu content reaches a broader domestic Pakistani audience.",
+      },
+      {
+        question: "Can you handle social media content production?",
+        answer: "Yes. Our content service includes social media post production for Instagram, Facebook, LinkedIn, and TikTok — captions, graphics briefs, and video scripts. We can also manage scheduling and publishing.",
+      },
+      {
+        question: "Does content marketing work for B2B businesses in Pakistan?",
+        answer: "Absolutely. B2B content marketing — case studies, industry guides, LinkedIn articles, and email nurture sequences — is one of the most effective lead generation channels for Pakistani B2B businesses targeting decision-makers.",
+      },
+    ],
+  },
+  {
+    slug: "branding",
+    title: "Branding",
+    desc: "Strategic brand identity that builds recognition, trust, and premium positioning.",
+    fullDesc:
+      "BITSOL Marketing builds brand identities for Pakistani businesses that want to look as professional as international agencies — and charge accordingly. Our branding team covers everything from brand strategy and naming to logo design, visual identity systems, brand guidelines, and brand voice frameworks. We don't just design logos; we build the complete system that ensures your brand is consistent and recognisable across your website, social media, packaging, signage, and sales materials. Whether you're launching a new brand, rebranding an existing business, or building a sub-brand for a new product, we deliver brand assets that command trust and justify premium pricing. Our clients consistently report that professional branding directly impacts their ability to close deals with larger clients and charge higher fees.",
+    metaTitle: "Branding Agency Pakistan | Logo Design, Brand Identity & Visual Design",
+    metaDescription:
+      "Professional branding agency in Pakistan. Logo design, brand identity, visual systems, and brand guidelines for businesses in Karachi, Lahore, and Islamabad. BITSOL Marketing.",
+    icon: Palette,
+    iconBg: "#7C3AED1A",
+    iconColor: "#7C3AED",
+    features: [
+      "Brand Strategy & Positioning",
+      "Logo & Visual Identity Design",
+      "Brand Guidelines & Style Guide",
+      "Brand Voice & Messaging Framework",
+    ],
+    benefits: [
+      "Command higher prices with a brand that communicates professionalism and quality from first impression.",
+      "Build instant recognition with a consistent visual identity across every customer touchpoint.",
+      "Differentiate from competitors with a brand strategy that owns a specific positioning in your market.",
+      "Scale marketing faster — consistent brand assets make every campaign, post, and ad more effective.",
+    ],
+    processSteps: [
+      { step: "Brand Discovery", detail: "We run a brand strategy workshop — positioning, audience, competitors, values, and differentiation." },
+      { step: "Strategy Document", detail: "We deliver a brand strategy document: positioning statement, value proposition, and target audience profiles." },
+      { step: "Visual Identity", detail: "Logo design (3 concepts), colour palette, typography, and core brand elements." },
+      { step: "Brand Guidelines", detail: "Comprehensive brand guidelines covering logo usage, colours, fonts, photography style, and dos and don'ts." },
+      { step: "Asset Production", detail: "We produce all required brand assets — social templates, business cards, email signatures, and letterheads." },
+    ],
+    faq: [
+      {
+        question: "How much does branding cost in Pakistan?",
+        answer: "Logo and basic brand identity packages start from PKR 50,000. Full brand identity with strategy, logo, guidelines, and asset production ranges from PKR 150,000–400,000. Enterprise rebranding projects are priced on scope.",
+      },
+      {
+        question: "How long does a branding project take?",
+        answer: "A logo-only project takes 2–3 weeks. A full brand identity with guidelines takes 4–6 weeks. Comprehensive brand strategy + identity projects take 6–10 weeks.",
+      },
+      {
+        question: "Do you offer rebranding for existing businesses?",
+        answer: "Yes. Rebranding is one of our most common branding projects. We audit your current brand, identify what's working and what's not, and build a new identity that retains brand equity while projecting a more professional image.",
+      },
+      {
+        question: "Do you design logos in vector format for print and digital?",
+        answer: "Yes. All logos are delivered in vector format (AI, EPS, SVG) suitable for any size — from business cards to billboards. We also provide PNG and JPG versions in all required dimensions for digital use.",
+      },
+      {
+        question: "Can you create social media templates as part of the branding?",
+        answer: "Yes. Our branding packages include branded social media templates for Instagram, Facebook, and LinkedIn — so your team can create on-brand posts without a designer for every piece of content.",
       },
     ],
   },

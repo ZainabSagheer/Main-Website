@@ -1,0 +1,22 @@
+# BITSOL Marketing — robots.txt
+# https://bitsolmarketing.com
+
+User-agent: *
+Allow: /
+
+# Block admin routes from all crawlers
+Disallow: /admin/
+Disallow: /api/
+
+# Block Next.js internals
+Disallow: /_next/
+Disallow: /static/
+
+# Allow specific API routes needed for SEO (sitemap, feeds)
+Allow: /api/blog/
+
+# Crawl-delay for well-behaved bots (not enforced by Google)
+Crawl-delay: 10
+
+# Sitemaps
+Sitemap: https://bitsolmarketing.com/sitemap.xml

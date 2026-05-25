@@ -3,7 +3,7 @@ import { services } from "@/lib/services";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import { ContactForm } from "@/components/ContactForm";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ChevronDown } from "lucide-react";
+import { CheckCircle2, ChevronDown } from "lucide-react";
 import type { Metadata } from "next";
 import Script from "next/script";
 
@@ -111,12 +111,17 @@ export default async function ServiceDetailPage({
 
           {/* Breadcrumb nav */}
           <nav aria-label="Breadcrumb" className="mb-12">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-brand-muted hover:text-brand-cyan transition-colors group"
-            >
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Services
-            </Link>
+            <ol className="flex items-center gap-2 text-sm text-slate-500 dark:text-brand-muted flex-wrap">
+              <li>
+                <Link href="/" className="hover:text-brand-cyan transition-colors">Home</Link>
+              </li>
+              <li className="select-none">/</li>
+              <li>
+                <Link href="/services" className="hover:text-brand-cyan transition-colors">Services</Link>
+              </li>
+              <li className="select-none">/</li>
+              <li className="text-slate-900 dark:text-white font-medium" aria-current="page">{service.title}</li>
+            </ol>
           </nav>
 
           {/* Hero */}

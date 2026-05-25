@@ -60,17 +60,44 @@ const faqSchema = {
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "BITSOL Marketing — Islamabad",
-  description: "AI digital marketing agency serving businesses in Islamabad and Rawalpindi, Pakistan.",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@id": "https://bitsolmarketing.com/digital-marketing-agency-islamabad#localbusiness",
+  name: "BITSOL Marketing — Digital Marketing Agency Islamabad",
+  description: "Result-driven digital marketing agency serving Islamabad and Rawalpindi. SEO, social media marketing, Google Ads, Meta Ads, web development, and branding.",
   url: "https://bitsolmarketing.com/digital-marketing-agency-islamabad",
-  telephone: "+92-310-317-5175",
+  telephone: "+923103175175",
+  priceRange: "$$",
+  image: "https://bitsolmarketing.com/opengraph-image",
   areaServed: [
     { "@type": "City", "name": "Islamabad" },
     { "@type": "City", "name": "Rawalpindi" },
   ],
-  address: { "@type": "PostalAddress", "addressLocality": "Islamabad", "addressCountry": "PK" },
-  serviceType: ["SEO", "Meta Ads", "Google Ads", "AI Automation", "Web Development"],
+  address: {
+    "@type": "PostalAddress",
+    "addressLocality": "Islamabad",
+    "addressCountry": "PK"
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    "name": "Digital Marketing Services in Islamabad",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Services Islamabad" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing Islamabad" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads Islamabad" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads Islamabad" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development Islamabad" } },
+    ]
+  },
+  parentOrganization: { "@id": "https://bitsolmarketing.com/#organization" },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://bitsolmarketing.com" },
+    { "@type": "ListItem", position: 2, name: "Digital Marketing Agency Islamabad", item: "https://bitsolmarketing.com/digital-marketing-agency-islamabad" },
+  ],
 };
 
 const services = [
@@ -87,6 +114,7 @@ export default function IslamabadPage() {
     <>
       <Script id="islamabad-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Script id="islamabad-local-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <Script id="islamabad-breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="pt-32 pb-24">
         <div className="container mx-auto px-6">

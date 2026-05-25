@@ -60,14 +60,46 @@ const faqSchema = {
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "BITSOL Marketing — Karachi",
-  description: "AI digital marketing agency serving businesses in Karachi, Pakistan.",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@id": "https://bitsolmarketing.com/digital-marketing-agency-karachi#localbusiness",
+  name: "BITSOL Marketing — Digital Marketing Agency Karachi",
+  description: "Result-driven digital marketing agency serving businesses in Karachi. SEO, social media marketing, Google Ads, Meta Ads, web development, and Google Business Profile optimization.",
   url: "https://bitsolmarketing.com/digital-marketing-agency-karachi",
-  telephone: "+92-310-317-5175",
-  areaServed: { "@type": "City", "name": "Karachi" },
-  address: { "@type": "PostalAddress", "addressLocality": "Karachi", "addressCountry": "PK" },
-  serviceType: ["SEO", "Meta Ads", "Google Ads", "AI Automation", "Web Development"],
+  telephone: "+923103175175",
+  priceRange: "$$",
+  image: "https://bitsolmarketing.com/opengraph-image",
+  areaServed: [
+    { "@type": "City", "name": "Karachi" },
+    { "@type": "State", "name": "Sindh" },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    "addressLocality": "Karachi",
+    "addressRegion": "Sindh",
+    "addressCountry": "PK"
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    "name": "Digital Marketing Services in Karachi",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Services Karachi" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing Karachi" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads Karachi" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads Karachi" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development Karachi" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Business Profile Optimization Karachi" } },
+    ]
+  },
+  parentOrganization: { "@id": "https://bitsolmarketing.com/#organization" },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://bitsolmarketing.com" },
+    { "@type": "ListItem", position: 2, name: "Digital Marketing Agency Karachi", item: "https://bitsolmarketing.com/digital-marketing-agency-karachi" },
+  ],
 };
 
 const services = [
@@ -84,6 +116,7 @@ export default function KarachiPage() {
     <>
       <Script id="karachi-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Script id="karachi-local-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <Script id="karachi-breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="pt-32 pb-24">
         <div className="container mx-auto px-6">

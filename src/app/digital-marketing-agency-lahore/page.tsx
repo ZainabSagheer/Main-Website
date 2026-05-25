@@ -60,14 +60,47 @@ const faqSchema = {
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "BITSOL Marketing — Lahore",
-  description: "AI digital marketing agency serving businesses in Lahore, Pakistan.",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@id": "https://bitsolmarketing.com/digital-marketing-agency-lahore#localbusiness",
+  name: "BITSOL Marketing — Digital Marketing Agency Lahore",
+  description: "Result-driven digital marketing agency in Lahore. SEO, social media marketing, Google Ads, Meta Ads, web development, and Google Business Profile optimization.",
   url: "https://bitsolmarketing.com/digital-marketing-agency-lahore",
-  telephone: "+92-310-317-5175",
-  areaServed: { "@type": "City", "name": "Lahore" },
-  address: { "@type": "PostalAddress", "addressLocality": "Lahore", "addressCountry": "PK" },
-  serviceType: ["SEO", "Meta Ads", "Google Ads", "AI Automation", "Web Development"],
+  telephone: "+923103175175",
+  priceRange: "$$",
+  image: "https://bitsolmarketing.com/opengraph-image",
+  areaServed: [
+    { "@type": "City", "name": "Lahore" },
+    { "@type": "State", "name": "Punjab" },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    "streetAddress": "83/3 C KB Commercial, Phase 1, DHA",
+    "addressLocality": "Lahore",
+    "addressRegion": "Punjab",
+    "postalCode": "54792",
+    "addressCountry": "PK"
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    "name": "Digital Marketing Services in Lahore",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Services Lahore" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing Lahore" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads Lahore" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads Lahore" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development Lahore" } },
+    ]
+  },
+  parentOrganization: { "@id": "https://bitsolmarketing.com/#organization" },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://bitsolmarketing.com" },
+    { "@type": "ListItem", position: 2, name: "Digital Marketing Agency Lahore", item: "https://bitsolmarketing.com/digital-marketing-agency-lahore" },
+  ],
 };
 
 const services = [
@@ -84,6 +117,7 @@ export default function LahorePage() {
     <>
       <Script id="lahore-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Script id="lahore-local-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <Script id="lahore-breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="pt-32 pb-24">
         <div className="container mx-auto px-6">
