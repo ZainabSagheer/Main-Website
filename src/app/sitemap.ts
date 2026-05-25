@@ -16,26 +16,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://bitsolmarketing.com';
 
+  const now = new Date();
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}`,                                    priority: 1.0,  changeFrequency: 'weekly' },
-    { url: `${baseUrl}/about`,                              priority: 0.9,  changeFrequency: 'monthly' },
-    { url: `${baseUrl}/services`,                           priority: 0.95, changeFrequency: 'weekly' },
-    { url: `${baseUrl}/pricing`,                            priority: 0.9,  changeFrequency: 'weekly' },
-    { url: `${baseUrl}/blog`,                               priority: 0.9,  changeFrequency: 'daily' },
-    { url: `${baseUrl}/contact`,                            priority: 0.9,  changeFrequency: 'monthly' },
-    { url: `${baseUrl}/portfolio`,                          priority: 0.75, changeFrequency: 'weekly' },
-    { url: `${baseUrl}/ai-solutions`,                       priority: 0.8,  changeFrequency: 'weekly' },
-    { url: `${baseUrl}/trading`,                            priority: 0.75, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/courses`,                            priority: 0.7,  changeFrequency: 'monthly' },
-    { url: `${baseUrl}/terms`,                              priority: 0.3,  changeFrequency: 'yearly' },
-    { url: `${baseUrl}/privacy`,                            priority: 0.3,  changeFrequency: 'yearly' },
-    { url: `${baseUrl}/cookies`,                            priority: 0.2,  changeFrequency: 'yearly' },
-    { url: `${baseUrl}/compliance`,                         priority: 0.2,  changeFrequency: 'yearly' },
+    { url: `${baseUrl}`,                                    priority: 1.0,  changeFrequency: 'weekly',  lastModified: now },
+    { url: `${baseUrl}/about`,                              priority: 0.9,  changeFrequency: 'monthly', lastModified: now },
+    { url: `${baseUrl}/services`,                           priority: 0.95, changeFrequency: 'weekly',  lastModified: now },
+    { url: `${baseUrl}/pricing`,                            priority: 0.9,  changeFrequency: 'weekly',  lastModified: now },
+    { url: `${baseUrl}/blog`,                               priority: 0.9,  changeFrequency: 'daily',   lastModified: now },
+    { url: `${baseUrl}/contact`,                            priority: 0.9,  changeFrequency: 'monthly', lastModified: now },
+    { url: `${baseUrl}/portfolio`,                          priority: 0.75, changeFrequency: 'weekly',  lastModified: now },
+    { url: `${baseUrl}/ai-solutions`,                       priority: 0.8,  changeFrequency: 'weekly',  lastModified: now },
+    { url: `${baseUrl}/trading`,                            priority: 0.75, changeFrequency: 'monthly', lastModified: now },
+    { url: `${baseUrl}/courses`,                            priority: 0.7,  changeFrequency: 'monthly', lastModified: now },
+    { url: `${baseUrl}/terms`,                              priority: 0.3,  changeFrequency: 'yearly',  lastModified: now },
+    { url: `${baseUrl}/privacy`,                            priority: 0.3,  changeFrequency: 'yearly',  lastModified: now },
+    { url: `${baseUrl}/cookies`,                            priority: 0.2,  changeFrequency: 'yearly',  lastModified: now },
+    { url: `${baseUrl}/compliance`,                         priority: 0.2,  changeFrequency: 'yearly',  lastModified: now },
     // City-specific pages — high local SEO priority
-    { url: `${baseUrl}/digital-marketing-agency-karachi`,   priority: 0.9,  changeFrequency: 'weekly' },
-    { url: `${baseUrl}/digital-marketing-agency-lahore`,    priority: 0.9,  changeFrequency: 'weekly' },
-    { url: `${baseUrl}/digital-marketing-agency-islamabad`, priority: 0.9,  changeFrequency: 'weekly' },
-  ].map((page) => ({ ...page, lastModified: new Date() }));
+    { url: `${baseUrl}/digital-marketing-agency-karachi`,   priority: 0.9,  changeFrequency: 'weekly',  lastModified: now },
+    { url: `${baseUrl}/digital-marketing-agency-lahore`,    priority: 0.9,  changeFrequency: 'weekly',  lastModified: now },
+    { url: `${baseUrl}/digital-marketing-agency-islamabad`, priority: 0.9,  changeFrequency: 'weekly',  lastModified: now },
+  ];
 
   const servicePages = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
