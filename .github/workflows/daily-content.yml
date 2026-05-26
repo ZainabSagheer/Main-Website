@@ -1,0 +1,43 @@
+name: BITSOL Daily Content Automation
+
+on:
+  schedule:
+    # 8:00 PM PKT = 15:00 UTC daily
+    - cron: "0 15 * * *"
+  workflow_dispatch: # allows manual trigger from GitHub UI
+
+jobs:
+  publish-content:
+    name: Write & Publish 3 Articles
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run daily content automation
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BLOG_API_KEY: ${{ secrets.BLOG_API_KEY }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_COMPANY_ID: ${{ secrets.LINKEDIN_COMPANY_ID }}
+          NEXT_PUBLIC_SITE_URL: https://bitsolmarketing.com
+        run: node scripts/daily-content-automation.mjs
+
+      - name: Upload log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-log-${{ github.run_id }}
+          path: scripts/logs/
+          retention-days: 30
