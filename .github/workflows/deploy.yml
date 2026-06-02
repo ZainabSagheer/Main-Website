@@ -50,28 +50,37 @@ jobs:
           CLEAN_TARGET=$(echo "$TARGET" | sed 's/[\\/]*$//')
           echo "target=$CLEAN_TARGET" >> $GITHUB_OUTPUT
 
-      - name: Deploy to Hostinger via SSH
-        uses: easingthemes/ssh-deploy@main
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: "-av --delete"
-          SOURCE: ".next/standalone/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: 65002
-          TARGET: ${{ steps.sanitize.outputs.target }}
-          SSH_CMD_ARGS: "-o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=10 -o TCPKeepAlive=yes"
+      - name: Write SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/deploy_key
+          chmod 600 /tmp/deploy_key
+
+      - name: Ensure remote directory exists
+        run: |
+          ssh -p 65002 -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o ServerAliveInterval=60 \
+            -o ServerAliveCountMax=10 \
+            -o TCPKeepAlive=yes \
+            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}" \
+            "mkdir -p '${{ steps.sanitize.outputs.target }}'"
+
+      - name: Deploy to Hostinger via rsync
+        run: |
+          rsync -av --delete \
+            -e "ssh -p 65002 -i /tmp/deploy_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=10 -o TCPKeepAlive=yes" \
+            .next/standalone/ \
+            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ steps.sanitize.outputs.target }}"
 
       - name: Restart Node.js app on Hostinger
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 65002
-          script: |
-            cd "${{ steps.sanitize.outputs.target }}"
-            # Try PM2 (VPS setup)
-            pm2 restart all 2>/dev/null || true
-            # Passenger restart (shared/business hosting)
-            mkdir -p tmp && touch tmp/restart.txt
+        run: |
+          ssh -p 65002 -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o ServerAliveInterval=60 \
+            -o ServerAliveCountMax=10 \
+            -o TCPKeepAlive=yes \
+            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}" "
+              cd '${{ steps.sanitize.outputs.target }}' &&
+              pm2 restart all 2>/dev/null || true &&
+              mkdir -p tmp && touch tmp/restart.txt
+            "
