@@ -24,6 +24,7 @@ async function buildSitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/pricing`,                            priority: 0.9,  changeFrequency: 'weekly',  lastModified: now },
     { url: `${baseUrl}/blog`,                               priority: 0.9,  changeFrequency: 'daily',   lastModified: now },
     { url: `${baseUrl}/contact`,                            priority: 0.9,  changeFrequency: 'monthly', lastModified: now },
+    { url: `${baseUrl}/careers`,                            priority: 0.85, changeFrequency: 'monthly', lastModified: now },
     { url: `${baseUrl}/portfolio`,                          priority: 0.75, changeFrequency: 'weekly',  lastModified: now },
     { url: `${baseUrl}/ai-solutions`,                       priority: 0.8,  changeFrequency: 'weekly',  lastModified: now },
     { url: `${baseUrl}/trading`,                            priority: 0.75, changeFrequency: 'monthly', lastModified: now },

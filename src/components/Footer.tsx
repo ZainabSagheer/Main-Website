@@ -34,6 +34,7 @@ const navigation = {
           name: "Company",
           items: [
             { name: "About Us", href: "/about" },
+            { name: "Careers", href: "/careers" },
             { name: "Our Process", href: "/about#process" },
             { name: "Blog", href: "/blog" },
           ],
