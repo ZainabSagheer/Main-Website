@@ -43,6 +43,13 @@ jobs:
           cp -r node_modules/@prisma/client/. .next/standalone/node_modules/@prisma/client/
           printf 'process.env.PORT = process.env.PORT || 3000;\nrequire("./server.js");\n' > .next/standalone/app.js
 
+      - name: Sanitize Remote Target
+        id: sanitize
+        run: |
+          TARGET="${{ secrets.REMOTE_TARGET }}"
+          CLEAN_TARGET=$(echo "$TARGET" | sed 's/[\\/]*$//')
+          echo "target=$CLEAN_TARGET" >> $GITHUB_OUTPUT
+
       - name: Deploy to Hostinger via SSH
         uses: easingthemes/ssh-deploy@main
         with:
@@ -52,7 +59,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: 65002
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+          TARGET: ${{ steps.sanitize.outputs.target }}
           SSH_CMD_ARGS: "-o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=10 -o TCPKeepAlive=yes"
 
       - name: Restart Node.js app on Hostinger
@@ -63,7 +70,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 65002
           script: |
-            cd ${{ secrets.REMOTE_TARGET }}
+            cd "${{ steps.sanitize.outputs.target }}"
             # Try PM2 (VPS setup)
             pm2 restart all 2>/dev/null || true
             # Passenger restart (shared/business hosting)
