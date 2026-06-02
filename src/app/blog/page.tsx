@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import AdBanner from "@/components/AdBanner";
 import Link from "next/link";
 import { GlowingCard } from "@/components/ui/glowing-card";
 import { ArrowRight, Calendar, User, Tag } from "lucide-react";
@@ -87,6 +88,11 @@ export default async function BlogPage() {
           business growth — straight from the BITSOL MARKETING team.
         </p>
       </section>
+
+      {/* Ad Banner */}
+      <div className="container mx-auto px-6 mb-12">
+        <AdBanner adSlot="8287317610" />
+      </div>
 
       {/* Posts Grid */}
       <section className="container mx-auto px-6">
