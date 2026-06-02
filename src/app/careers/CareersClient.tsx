@@ -317,8 +317,9 @@ export default function CareersClient() {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-widest text-brand-muted">Your Name</label>
+                        <label htmlFor="name-input" className="text-xs font-bold uppercase tracking-widest text-brand-muted">Your Name</label>
                         <input 
+                          id="name-input"
                           required
                           type="text"
                           value={formData.name}
@@ -328,8 +329,9 @@ export default function CareersClient() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-xs font-bold uppercase tracking-widest text-brand-muted">Email Address</label>
+                        <label htmlFor="email-input" className="text-xs font-bold uppercase tracking-widest text-brand-muted">Email Address</label>
                         <input 
+                          id="email-input"
                           required
                           type="email"
                           value={formData.email}
@@ -341,8 +343,10 @@ export default function CareersClient() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-brand-muted">Target Career Path</label>
+                      <label htmlFor="role-select" className="text-xs font-bold uppercase tracking-widest text-brand-muted">Target Career Path</label>
                       <select 
+                        id="role-select"
+                        title="Target Career Path Select"
                         value={formData.role}
                         onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                         className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-4 outline-none focus:border-brand-cyan transition-all text-slate-900 dark:text-white text-sm"
@@ -356,11 +360,12 @@ export default function CareersClient() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-brand-muted flex items-center gap-1">
+                      <label htmlFor="portfolio-input" className="text-xs font-bold uppercase tracking-widest text-brand-muted flex items-center gap-1">
                         <LinkIcon className="w-3.5 h-3.5 text-brand-cyan" />
                         LinkedIn / Portfolio URL
                       </label>
                       <input 
+                        id="portfolio-input"
                         required
                         type="url"
                         value={formData.portfolio}
@@ -371,8 +376,9 @@ export default function CareersClient() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-widest text-brand-muted">Why BITSOL? (Short Pitch)</label>
+                      <label htmlFor="pitch-input" className="text-xs font-bold uppercase tracking-widest text-brand-muted">Why BITSOL? (Short Pitch)</label>
                       <textarea 
+                        id="pitch-input"
                         required
                         rows={4}
                         value={formData.pitch}
