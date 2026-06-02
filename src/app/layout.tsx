@@ -198,7 +198,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "sameAs": [
                     "https://www.facebook.com/bitsolmarketing/",
                     "https://www.linkedin.com/company/bitsolpvtltd/",
-                    "https://www.instagram.com/bitsolmarketing"
+                    "https://www.instagram.com/bitsol_marketing/"
                   ]
                 },
                 {

@@ -1,4 +1,5 @@
 import Hero from "@/components/hero/Hero";
+import Partners from "@/components/home/Partners";
 import ServicesGrid from "@/components/home/ServicesGrid";
 import Testimonials from "@/components/home/Testimonials";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
@@ -87,6 +88,7 @@ export default async function Home() {
     <div className="relative w-full">
       <Script id="homepage-faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Hero />
+      <Partners />
       
       {/* Services Section */}
       <ServicesGrid />

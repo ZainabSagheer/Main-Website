@@ -135,7 +135,7 @@ export default function Footer() {
           </Link>
           <Link
             aria-label="Instagram"
-            href="https://www.instagram.com/bitsolmarketing"
+            href="https://www.instagram.com/bitsol_marketing/"
             target="_blank"
             className={Underline}
           >

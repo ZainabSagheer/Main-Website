@@ -15,16 +15,22 @@ export async function POST(req: Request) {
       );
     }
 
-    // Save lead to MongoDB
-    const lead = await prisma.lead.create({
-      data: {
-        name,
-        email,
-        subject: service || "General Inquiry",
-        message,
-        status: "NEW",
-      },
-    });
+    // Save lead to database
+    let leadId = "fallback-id";
+    try {
+      const lead = await prisma.lead.create({
+        data: {
+          name,
+          email,
+          subject: service || "General Inquiry",
+          message,
+          status: "NEW",
+        },
+      });
+      leadId = lead.id;
+    } catch (dbError) {
+      console.error("Failed to save lead to database, proceeding with email/WhatsApp fallback:", dbError);
+    }
 
     // Attempt to send email, but don't fail the request if it doesn't work
     if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== "re_dummy") {
@@ -50,7 +56,7 @@ export async function POST(req: Request) {
       }
     }
 
-    return NextResponse.json({ success: true, leadId: lead.id }, { status: 200 });
+    return NextResponse.json({ success: true, leadId }, { status: 200 });
   } catch (error) {
     console.error("Lead submission error:", error);
     return NextResponse.json(
