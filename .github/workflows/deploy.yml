@@ -57,7 +57,9 @@ jobs:
 
       - name: Deploy to Hostinger via rsync
         run: |
-          rsync -av --delete --mkpath \
+          TARGET="${{ steps.sanitize.outputs.target }}"
+          rsync -av --delete \
+            --rsync-path="mkdir -p '$TARGET' && rsync" \
             -e "ssh -p 65002 -i /tmp/deploy_key \
                 -o StrictHostKeyChecking=no \
                 -o BatchMode=yes \
@@ -67,7 +69,7 @@ jobs:
                 -o TCPKeepAlive=yes \
                 -o LogLevel=ERROR" \
             .next/standalone/ \
-            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ steps.sanitize.outputs.target }}"
+            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:$TARGET"
 
       - name: Restart Node.js app on Hostinger
         run: |
