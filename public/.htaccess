@@ -1,0 +1,76 @@
+# ==============================================================================
+# BITSOL MARKETING - SEO HARDENING & SERVER SECURITY CONFIGURATION
+# Enforces clean routing, canonical domains, prevents 403 listing locks, and secures system files.
+# ==============================================================================
+
+# Disable directory browsing (Directory listing disabled)
+# Eliminates 403 Forbidden errors when default directory index files are missing.
+Options -Indexes
+
+# Ensure Apache follows symbolic links
+Options +FollowSymLinks
+
+# Enable URL rewriting
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ----------------------------------------------------------------------------
+  # 1. Canonical Redirect: www to non-www (https://bitsolmarketing.com)
+  # ----------------------------------------------------------------------------
+  RewriteCond %{HTTP_HOST} ^www\.bitsolmarketing\.com$ [NC]
+  RewriteRule ^(.*)$ https://bitsolmarketing.com/$1 [R=301,L]
+
+  # ----------------------------------------------------------------------------
+  # 2. Canonical Redirect: Force HTTPS (Secures connections)
+  # ----------------------------------------------------------------------------
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://bitsolmarketing.com/$1 [R=301,L]
+
+  # ----------------------------------------------------------------------------
+  # 3. Clean URLs & Fallback: Route non-existent files/directories to index.html
+  # Prevents 403 and 404 errors on direct sub-page navigation in static/server mode.
+  # ----------------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteRule ^(.*)$ index.html [L]
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 4. Prevent WAF / Firewall false positives (Invites bots and crawlers)
+# ------------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Expose global permissions for trusted crawlers and API clients
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+  Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+
+  # Anti-Clickjacking
+  Header set X-Frame-Options "SAMEORIGIN"
+  
+  # Cross-Site Scripting (XSS) Protection
+  Header set X-XSS-Protection "1; mode=block"
+  
+  # Enforce nosniff for MIME types
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 5. Security Hardening: Shield sensitive environment credentials and codebases
+# ------------------------------------------------------------------------------
+<FilesMatch "^\.(env|git|github|vscode|env\.local|gitignore|htaccess|prisma|db)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+<FilesMatch "^(package\.json|package-lock\.json|tsconfig\.json|next\.config\.ts|components\.json|deploy\.mjs|prepare-hostinger\.mjs|Procfile)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# ------------------------------------------------------------------------------
+# 6. Global Error Document Handlers
+# ------------------------------------------------------------------------------
+ErrorDocument 403 /404.html
+ErrorDocument 404 /404.html

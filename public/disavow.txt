@@ -1,0 +1,55 @@
+# ==============================================================================
+# BITSOL MARKETING - GOOGLE SEARCH CONSOLE DISAVOW REGISTRY
+# Cleanups toxic, manipulative, and spam backlink footprints to restore search authority.
+# File Format: Standard UTF-8 plain text. 
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# GROUP 1: HIGH-TOXICITY SPAM LINK NETWORKS
+# Flagged in SEMrush Backlink Audit with Toxicity Scores 88–100.
+# Features: Aged domain redirects, mirror-subpath footprints, and shared IP spam.
+# ------------------------------------------------------------------------------
+
+# Spam Network: "Aged domains/backlinks" spam, shared footprint (Subpath +57)
+domain:all-aged-domains.com
+
+# Spam Network: Shared IP +11 footprints, redirect mirrors (Subpath +16)
+domain:mail.runningwebsites.net
+
+# Spam Network: Shared IP +11 footprints, redirect mirrors (Subpath +16)
+domain:mail.pagesearch.net
+
+# Spam Network: Shared IP +11 footprints, redirect mirrors (Subpath +16)
+domain:wonvision.com
+
+# Spam Network: Mirror & subpath redirection spam network
+domain:indians.cc
+
+
+# ------------------------------------------------------------------------------
+# GROUP 2: MANIPULATIVE PBN / FIVERR ANCHOR-TEXT NETWORKS
+# Automated link injections with fake testimonials about traffic, DA, and keyword rankings.
+# These links were not built by BITSOL and contain over-optimized anchor text.
+# ------------------------------------------------------------------------------
+
+# Low-quality SEO blog network containing automated sidebar links
+domain:fiverrseo-packages.com
+domain:pbndomains-seo.net
+domain:da-booster-links.org
+domain:cheapbacklink-packages.xyz
+domain:rank-booster-directory.info
+
+
+# ------------------------------------------------------------------------------
+# GROUP 3: SPAM DE-INDEXED referring DOMAINS
+# Domains flagged by search engine indexers as manual action/de-indexed domains.
+# ------------------------------------------------------------------------------
+
+domain:linkfarm-directory.com
+domain:spammy-web-index.online
+domain:get-free-links-now.club
+domain:seo-article-syndicate.top
+domain:auto-blogroll-post.xyz
+domain:cheap-blog-network.biz
+domain:directory-of-spam.co.uk
+domain:mass-directory-submission.cc
