@@ -57,24 +57,44 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/deploy_key
           chmod 600 /tmp/deploy_key
 
+      - name: Test SSH connectivity
+        run: |
+          ssh -p 65002 -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o BatchMode=yes \
+            -o ConnectTimeout=30 \
+            -o ServerAliveInterval=10 \
+            -o ServerAliveCountMax=3 \
+            -o LogLevel=VERBOSE \
+            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}" \
+            "echo SSH_OK && hostname" || echo "SSH test failed — check key / firewall"
+
       - name: Deploy to Hostinger via rsync
         run: |
           TARGET="${{ steps.sanitize.outputs.target }}"
-          for attempt in 1 2 3; do
-            echo "Deploy attempt $attempt/3..."
-            rsync -av --delete \
+          SSH_OPTS="-p 65002 -i /tmp/deploy_key \
+            -o StrictHostKeyChecking=no \
+            -o BatchMode=yes \
+            -o ConnectTimeout=60 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=8 \
+            -o TCPKeepAlive=yes \
+            -o Compression=no \
+            -o IPQoS=throughput \
+            -o LogLevel=ERROR"
+          for attempt in 1 2 3 4 5; do
+            echo "Deploy attempt $attempt/5..."
+            rsync -av --delete --timeout=120 \
               --rsync-path="mkdir -p '$TARGET' && rsync" \
-              -e "ssh -p 65002 -i /tmp/deploy_key \
-                  -o StrictHostKeyChecking=no \
-                  -o BatchMode=yes \
-                  -o ConnectTimeout=60 \
-                  -o ServerAliveInterval=30 \
-                  -o ServerAliveCountMax=5 \
-                  -o TCPKeepAlive=yes \
-                  -o LogLevel=ERROR" \
+              -e "ssh $SSH_OPTS" \
               .next/standalone/ \
-              "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:$TARGET" && break
-            echo "Attempt $attempt failed, waiting 30s before retry..."
-            sleep 30
+              "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:$TARGET" && { echo "Deploy succeeded on attempt $attempt"; break; }
+            echo "Attempt $attempt failed."
+            [ $attempt -lt 5 ] && sleep 45
           done
+          # Fail the workflow if all attempts failed
+          rsync --dry-run -e "ssh $SSH_OPTS" \
+            .next/standalone/app.js \
+            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:$TARGET/" || \
+            { echo "All deploy attempts failed — SSH connection to Hostinger is broken"; exit 1; }
 
