@@ -166,29 +166,29 @@ export default function CareersClient() {
             {[
               {
                 icon: Zap,
-                color: "#00D9FF",
-                bg: "#00D9FF1A",
+                colorClass: "text-brand-cyan",
+                bgClass: "bg-brand-cyan/10",
                 title: "Autonomy & Impact",
                 desc: "We completely reject micro-management. Own your projects, implement solutions, and make a massive visual impact.",
               },
               {
                 icon: GraduationCap,
-                color: "#7C3AED",
-                bg: "#7C3AED1A",
+                colorClass: "text-brand-purple",
+                bgClass: "bg-brand-purple/10",
                 title: "Continuous Upskilling",
                 desc: "Compounding learning allowances, professional certifications, and technical book budgets to constantly build your edge.",
               },
               {
                 icon: Users,
-                color: "#00D9FF",
-                bg: "#00D9FF1A",
+                colorClass: "text-brand-cyan",
+                bgClass: "bg-brand-cyan/10",
                 title: "Collaborative Flow",
                 desc: "Work closely with senior architects, engage in elite pair-programming, and deliver clean, enterprise-ready codebases.",
               },
               {
                 icon: ShieldCheck,
-                color: "#7C3AED",
-                bg: "#7C3AED1A",
+                colorClass: "text-brand-purple",
+                bgClass: "bg-brand-purple/10",
                 title: "Premium Packages",
                 desc: "Top-market salary packages, performance incentives, annual profit sharing, and full healthcare support plans.",
               },
@@ -197,10 +197,9 @@ export default function CareersClient() {
                 <GlowingCard className="h-full">
                   <div className="p-8 flex flex-col h-full">
                     <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 shrink-0"
-                      style={{ backgroundColor: perk.bg }}
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 shrink-0 ${perk.bgClass}`}
                     >
-                      <perk.icon className="w-6 h-6" style={{ color: perk.color }} />
+                      <perk.icon className={`w-6 h-6 ${perk.colorClass}`} />
                     </div>
                     <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">{perk.title}</h3>
                     <p className="text-slate-600 dark:text-brand-muted text-sm leading-relaxed flex-grow">{perk.desc}</p>
