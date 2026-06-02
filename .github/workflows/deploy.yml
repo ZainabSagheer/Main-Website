@@ -42,6 +42,8 @@ jobs:
           mkdir -p .next/standalone/node_modules/@prisma/client
           cp -r node_modules/@prisma/client/. .next/standalone/node_modules/@prisma/client/
           printf 'process.env.PORT = process.env.PORT || 3000;\nrequire("./server.js");\n' > .next/standalone/app.js
+          mkdir -p .next/standalone/tmp
+          date -u > .next/standalone/tmp/restart.txt
 
       - name: Sanitize Remote Target
         id: sanitize
@@ -76,15 +78,3 @@ jobs:
             sleep 30
           done
 
-      - name: Restart Node.js app on Hostinger
-        run: |
-          ssh -p 65002 -i /tmp/deploy_key \
-            -o StrictHostKeyChecking=no \
-            -o BatchMode=yes \
-            -o ConnectTimeout=30 \
-            -o ServerAliveInterval=30 \
-            -o ServerAliveCountMax=5 \
-            -o TCPKeepAlive=yes \
-            -o LogLevel=ERROR \
-            "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}" \
-            "pm2 restart all 2>/dev/null; mkdir -p '${{ steps.sanitize.outputs.target }}/tmp' && touch '${{ steps.sanitize.outputs.target }}/tmp/restart.txt'"
