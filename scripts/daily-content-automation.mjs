@@ -180,10 +180,24 @@ Return ONLY valid JSON, no extra text:
 }
 
 // ── Step 3: Get Unsplash image ─────────────────────────────────────────────────
-async function getUnsplashImage(query) {
-  // Use a deterministic Unsplash URL based on the query — no API key needed
-  const seed = encodeURIComponent(query.replace(/\s+/g, "-"));
-  return `https://source.unsplash.com/1200x630/?${seed}`;
+// source.unsplash.com is deprecated — use direct photo IDs per niche instead.
+const NICHE_PHOTOS = {
+  "digital-marketing":  ["1551288049-bebda4e38f71","1460925895917-afdab827c52f","1504868584819-f8e8b4b6d7e3","1542435503-956c469947f6","1559136555-9303baea8ebd"],
+  "seo":                ["1432888498266-38ffec3eaf0a","1573804633927-bfcbcd909acd","1516321318423-f06f85e504b3","1562577309-4932fdd64cd1","1563986768609-322da13575f3"],
+  "ecommerce":          ["1556742049-0cfed4f6a45d","1607082348824-0a96f2a4b9da","1556761175-4b46a572b786","1607252650355-f7fd0460ccdb","1546961342-ea5f56e58e98"],
+  "social-media":       ["1611162617213-7d7a39e9b1d7","1611162616305-c69b3fa7fbe0","1611162618071-b39a2ec055fb","1536240478700-b869ad10a2eb","1493612276216-ee3925520721"],
+  "ai-automation":      ["1677442135703-1787eea5ce01","1620712943543-bcc4688e7485","1664575602554-2087b04935a5","1485827404703-89b55fcc595e","1655720828018-edd2daec9349"],
+  "web-dev":            ["1547658719-da2b51169166","1504868584819-f8e8b4b6d7e3","1558494949-ef010cbdcc31","1512941937669-90a1b58e7e9c","1499750310107-5fef28a66643"],
+  "entrepreneurship":   ["1559136555-9303baea8ebd","1493612276216-ee3925520721","1460925895917-afdab827c52f","1504868584819-f8e8b4b6d7e3","1542435503-956c469947f6"],
+  "pakistan-business":  ["1559136555-9303baea8ebd","1504868584819-f8e8b4b6d7e3","1551288049-bebda4e38f71","1460925895917-afdab827c52f","1432888498266-38ffec3eaf0a"],
+};
+const _photoCounters = {};
+
+function getUnsplashImage(query, niche) {
+  const pool = NICHE_PHOTOS[niche] ?? NICHE_PHOTOS["digital-marketing"];
+  const idx = (_photoCounters[niche] ?? 0) % pool.length;
+  _photoCounters[niche] = idx + 1;
+  return `https://images.unsplash.com/photo-${pool[idx]}?w=1200&q=80`;
 }
 
 // ── Step 4: Publish article to website ────────────────────────────────────────
@@ -301,7 +315,7 @@ async function main() {
 
     try {
       // Get hero image
-      const imageUrl = await getUnsplashImage(topic.imageQuery || topic.primaryKeyword);
+      const imageUrl = getUnsplashImage(topic.imageQuery || topic.primaryKeyword, topic.niche);
       log(`  Hero image: ${imageUrl}`);
 
       // Write article content
