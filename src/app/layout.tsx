@@ -70,6 +70,9 @@ export const metadata: Metadata = {
       "Result-driven SEO, social media marketing, Google Ads, Meta Ads & web development for brands in Pakistan and worldwide.",
     images: ["https://bitsolmarketing.com/opengraph-image"],
   },
+  verification: {
+    google: "5_RFeyfgeVNvRbrwLfiLK_2nnc81N04BypWiVuQDPgE",
+  },
   other: {
     "google-adsense-account": "ca-pub-1462759459302506",
   },
