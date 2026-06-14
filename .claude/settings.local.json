@@ -95,7 +95,15 @@
       "mcp__claude_ai_Ahrefs__site-explorer-anchors",
       "mcp__claude_ai_Ahrefs__subscription-info-limits-and-usage",
       "mcp__claude_ai_Ahrefs__site-explorer-domain-rating",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git config *)",
+      "Bash(curl -s -H \"Authorization: token $\\(git config --global github.token || echo ''\\)\" \"https://api.github.com/repos/ZainabSagheer/Main-Website/actions/runs?per_page=5\")",
+      "Bash(python3 -c \"import sys,json; runs=json.load\\(sys.stdin\\).get\\('workflow_runs',[]\\); [print\\(r['name'], r['status'], r['conclusion'], r['created_at'], r['html_url']\\) for r in runs[:5]]\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{time_total}s\" https://bitsolmarketing.com/)",
+      "Bash(schtasks /query /fo LIST /v)",
+      "Bash(findstr /i \"bitsol\\\\|content\\\\|daily\\\\|automation\")",
+      "Bash(node -e \"require\\('@anthropic-ai/sdk'\\); console.log\\('anthropic SDK OK'\\)\")",
+      "PowerShell(schtasks /query /tn \"\\\\BITSOL-Daily-Content-Automation\" /fo LIST /v 2>&1)"
     ],
     "additionalDirectories": [
       "d:\\BITSOL Marketing Private Limited\\bitsol-frontend\\src\\app\\api\\admin\\stagger-dates"

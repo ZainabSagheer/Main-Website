@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)",
+      "Bash(dir /s /b)",
+      "Bash(Get-ChildItem \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\" -Recurse)",
+      "Bash(Get-ChildItem -Path \"d:\\\\BITSOL Marketing Private Limited\\\\bitsol-frontend\" -Recurse -Include \"*.mjs\", \"*.js\", \".env*\")",
+      "Bash(Select-Object -First 50)",
+      "Bash(find \"d:/BITSOL Marketing Private Limited/SEO AGENT/content\" -type f 2>/dev/null | head -30)",
+      "Read(//d/BITSOL Marketing Private Limited/SEO AGENT/content/**)",
+      "Bash(node scripts/publish-20-trending-articles.mjs --dry-run)",
+      "Bash(node scripts/publish-20-trending-articles.mjs)",
+      "Bash(node scripts/schedule-20-trending-linkedin.mjs)",
+      "Bash(node scripts/post-thumbnails-linkedin.mjs --dry-run)",
+      "Bash(node scripts/post-thumbnails-linkedin.mjs)",
+      "WebFetch(domain:conversiq.bitsolmarketing.com)",
+      "Bash(node scripts/post-conversiq-linkedin.mjs)",
+      "Bash(node -e \"require\\('@anthropic-ai/sdk'\\)\")"
+    ],
+    "additionalDirectories": [
+      "d:\\BITSOL Marketing Private Limited\\SEO AGENT\\content\\briefs",
+      "d:\\BITSOL Marketing Private Limited\\SEO AGENT\\content\\articles"
+    ]
+  }
+}
