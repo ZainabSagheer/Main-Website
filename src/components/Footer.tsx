@@ -46,6 +46,7 @@ const navigation = {
             { name: "Terms of Service", href: "/terms" },
             { name: "Privacy Policy", href: "/privacy" },
             { name: "Cookie Policy", href: "/cookies" },
+            { name: "Refund Policy", href: "/refund" },
             { name: "Compliance", href: "/compliance" },
           ],
         },

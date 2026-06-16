@@ -2,13 +2,13 @@
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
-import { ArrowLeft, Scale, ShieldCheck, Cookie, FileCheck } from "lucide-react";
+import { ArrowLeft, Scale, ShieldCheck, Cookie, FileCheck, RotateCcw } from "lucide-react";
 import Link from "next/link";
 
 interface LegalPageProps {
   title: string;
   lastUpdated: string;
-  icon: "terms" | "privacy" | "cookies" | "compliance";
+  icon: "terms" | "privacy" | "cookies" | "compliance" | "refund";
   children: ReactNode;
 }
 
@@ -17,6 +17,7 @@ const icons = {
   privacy: <ShieldCheck className="w-12 h-12 text-brand-purple" />,
   cookies: <Cookie className="w-12 h-12 text-brand-cyan" />,
   compliance: <FileCheck className="w-12 h-12 text-brand-purple" />,
+  refund: <RotateCcw className="w-12 h-12 text-brand-cyan" />,
 };
 
 export function LegalPage({ title, lastUpdated, icon, children }: LegalPageProps) {
