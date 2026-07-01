@@ -40,6 +40,7 @@
 }
 
 :root {
+  --nav-height: 80px;
   --background: #FFFFFF;
   --foreground: #050816;
   --card: #F8FAFC;
@@ -510,3 +511,10 @@ html.lenis {
   padding: 0;
 }
 /* ─── End Blog Prose ─────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 70px;
+  }
+}
+

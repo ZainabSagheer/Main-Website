@@ -40,7 +40,7 @@ export function SplineSceneBasic() {
       
       <div className="flex h-full flex-col md:flex-row container mx-auto px-6 relative z-10">
         {/* Left content */}
-        <div className="flex-1 p-12 relative z-10 flex flex-col justify-center">
+        <div className="flex-1 px-6 pb-12 pt-[calc(var(--nav-height)+2rem)] md:p-12 relative z-10 flex flex-col justify-center">
           <p className="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-4">
             Result-Driven Digital Marketing Agency in Pakistan
           </p>

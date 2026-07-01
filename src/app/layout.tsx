@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import "@/components/navbar/navbar.css";
 import SmoothScroll from "@/components/SmoothScroll";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/Footer";
 import { Entropy } from "@/components/ClientDynamics";
 
